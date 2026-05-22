@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>متجر ماري للكتب - Mary's Bookstore</title>
+    <link rel="icon" type="image/png" href="/img.png">
+    <link rel="apple-touch-icon" href="/img.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* ============================================ */
+        /* الوضع النهاري (Light Mode) - ألوان دافئة متناسقة */
+        /* ============================================ */
+        :root {
+            /* الخلفيات */
+            --bg-body: linear-gradient(135deg, #fef9f0 0%, #fdf0e0 100%);
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-header: linear-gradient(135deg, #2c1810 0%, #3d2317 100%);
+            
+            /* النصوص */
+            --text-primary: #2c1810;
+            --text-secondary: #5a3a2a;
+            --text-muted: #8b6b5a;
+            --text-white: #ffffff;
+            
+            /* الألوان الأساسية */
+            --color-primary: #c97e5a;
+            --color-primary-dark: #b85c3a;
+            --color-primary-light: #e8a87c;
+            
+            /* الأزرار */
+            --btn-gradient: linear-gradient(135deg, #c97e5a, #b85c3a);
+            --btn-hover: #a04e2e;
+            
+            /* الحدود والظلال */
+            --border-color: #f0e4d8;
+            --shadow-sm: 0 4px 15px rgba(44, 24, 16, 0.05);
+            --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.08);
+            --shadow-lg: 0 8px 30px rgba(44, 24, 16, 0.12);
+            
+            /* حالة الكتب */
+            --available-bg: #27ae60;
+            --outofstock-bg: #e74c3c;
+            
+            /* التصنيفات */
+            --category-hover: #fdf0e4;
+            --category-active: linear-gradient(135deg, #c97e5a, #b85c3a);
+            
+            /* القوائم الجانبية */
+            --overlay-bg: rgba(44, 24, 16, 0.5);
+            --fab-bg: #c97e5a;
+            
+            /* روابط التواصل */
+            --instagram: #E4405F;
+            --instagram-hover: #c1354d;
+        }
+
+        /* ============================================ */
+        /* الوضع الليلي (Dark Mode) - ألوان هادئة متناسقة */
+        /* ============================================ */
+        body.dark {
+            --bg-body: linear-gradient(135deg, #12121a 0%, #1a1a2e 100%);
+            --bg-card: #232338;
+            --bg-sidebar: #232338;
+            --bg-header: linear-gradient(135deg, #0a0a12 0%, #12121a 100%);
+            
+            --text-primary: #f0f0f5;
+            --text-secondary: #b8b8d0;
+            --text-muted: #8888a0;
+            --text-white: #ffffff;
+            
+            --color-primary: #e8955a;
+            --color-primary-dark: #d47a45;
+            --color-primary-light: #f0b080;
+            
+            --btn-gradient: linear-gradient(135deg, #e8955a, #d47a45);
+            --btn-hover: #c06535;
+            
+            --border-color: #33334a;
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
+            
+            --available-bg: #2ecc71;
+            --outofstock-bg: #e74c3c;
+            
+            --category-hover: #2a2a3e;
+            --category-active: linear-gradient(135deg, #e8955a, #d47a45);
+            
+            --overlay-bg: rgba(0, 0, 0, 0.7);
+            --fab-bg: #e8955a;
+            
+            --instagram: #E4405F;
+            --instagram-hover: #c1354d;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+
+        /* ============================================ */
+        /* الهيدر (Header) */
+        /* ============================================ */
+        .header {
+            background: var(--bg-header);
+            padding: 0.7rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0b27a, #c0392b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theme-toggle, .instagram-link, .cart-link {
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            border-radius: 40px;
+            padding: 0.35rem 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-white);
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover, .cart-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .instagram-link {
+            background: var(--instagram);
+        }
+
+        .instagram-link:hover {
+            background: var(--instagram-hover);
+            transform: translateY(-2px);
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-count {
+            background: var(--color-primary);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            min-width: 18px;
+            text-align: center;
+            color: white;
+        }
+
+        /* ============================================ */
+        /* المحتوى الرئيسي */
+        /* ============================================ */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        /* ============================================ */
+        /* القائمة الجانبية */
+        /* ============================================ */
+        .sidebar {
+            background: var(--bg-sidebar);
+            border-radius: 20px;
+            padding: 1.3rem;
+            position: sticky;
+            top: 85px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            height: fit-content;
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-right: 3px solid var(--color-primary);
+            padding-right: 10px;
+            color: var(--text-primary);
+        }
+
+        .category-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .category-item {
+            padding: 0.7rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+
+        .category-item i {
+            width: 22px;
+            font-size: 0.95rem;
+        }
+
+        .category-item:hover {
+            background: var(--category-hover);
+            color: var(--color-primary);
+            transform: translateX(-4px);
+        }
+
+        .category-item.active {
+            background: var(--category-active);
+            color: white;
+        }
+
+        /* ============================================ */
+        /* زر القائمة للهواتف */
+        /* ============================================ */
+        .fab-menu {
+            display: none;
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--fab-bg);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 1050;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .fab-menu:hover {
+            transform: scale(1.05);
+            background: var(--color-primary-dark);
+        }
+
+        /* ============================================ */
+        /* القائمة الجانبية للهواتف */
+        /* ============================================ */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--overlay-bg);
+            z-index: 1100;
+            backdrop-filter: blur(4px);
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-sidebar);
+            z-index: 1101;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            overflow-y: auto;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .mobile-sidebar.open {
+            right: 0;
+        }
+
+        .mobile-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .mobile-sidebar-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .close-sidebar-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .close-sidebar-btn:hover {
+            transform: rotate(90deg);
+            color: var(--color-primary);
+        }
+
+        .mobile-category-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-category-item {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            border-radius: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-category-item i {
+            width: 24px;
+        }
+
+        .mobile-category-item:hover {
+            background: var(--category-hover);
+            color: var(--color-primary);
+        }
+
+        .mobile-category-item.active {
+            background: var(--category-active);
+            color: white;
+        }
+
+        /* ============================================ */
+        /* قسم الكتب */
+        /* ============================================ */
+        .books-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            border-right: 3px solid var(--color-primary);
+            padding-right: 12px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ============================================ */
+        /* بطاقة الكتاب */
+        /* ============================================ */
+        .book-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            border: 1px solid var(--border-color);
+        }
+
+        .book-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .book-cover {
+            height: 240px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-cover-img {
+            transform: scale(1.05);
+        }
+
+        .book-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            z-index: 1;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-available {
+            background: var(--available-bg);
+        }
+
+        .status-out {
+            background: var(--outofstock-bg);
+        }
+
+        .book-info {
+            padding: 1rem;
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .book-author {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .book-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin: 8px 0;
+        }
+
+        .book-summary {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin: 8px 0;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--btn-gradient);
+            border: none;
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            background: var(--btn-hover);
+        }
+
+        .add-to-cart-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* ============================================ */
+        /* تصميم متجاوب للهواتف */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .fab-menu {
+                display: flex;
+            }
+            
+            .container {
+                display: block;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main-wrapper {
+                margin: 1rem auto;
+                padding: 0 0.8rem;
+                padding-bottom: 80px;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .book-cover {
+                height: 200px;
+            }
+            
+            .books-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-toggle span, 
+            .instagram-link span, 
+            .cart-link span {
+                display: none;
+            }
+            
+            .fab-menu {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .logo-text p {
+                display: none;
+            }
+            
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-text h1 {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ============================================ */
+        /* تأثيرات الحركة */
+        /* ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .book-card {
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100px); opacity: 0; }
+        }
+
+        /* ============================================ */
+        /* شريط التمرير */
+        /* ============================================ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary-dark);
+        }
+
+        body.sidebar-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <a href="/" class="logo">
+            <img src="/img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
+            <div class="logo-text">
+                <h1>📚 متجر ماري للكتب</h1>
+                <p>Mary's Bookstore</p>
+            </div>
+        </a>
+        <div class="header-actions">
+            <a href="https://www.instagram.com/marie__books_/" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram"></i>
+                <span>إنستغرام</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>ليلي</span>
+            </button>
+            <a href="/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>السلة</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<button class="fab-menu" id="fabMenuBtn">
+    <i class="fas fa-bars"></i>
+</button>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+        <h3><i class="fas fa-tags"></i> أنواع الكتب</h3>
+        <button class="close-sidebar-btn" id="closeSidebarBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <ul class="mobile-category-list" id="mobileCategoryList">
+        <li class="mobile-category-item active" data-category="all"><i class="fas fa-book"></i> جميع الكتب</li>
+        <li class="mobile-category-item" data-category="religious"><i class="fas fa-mosque"></i> دينية</li>
+        <li class="mobile-category-item" data-category="romance"><i class="fas fa-heart"></i> رومانسية</li>
+        <li class="mobile-category-item" data-category="fiction"><i class="fas fa-dragon"></i> أدب خيالي</li>
+        <li class="mobile-category-item" data-category="development"><i class="fas fa-chart-line"></i> تطوير ذات</li>
+        <li class="mobile-category-item" data-category="horror"><i class="fas fa-skull"></i> رعب</li>
+        <li class="mobile-category-item" data-category="novels"><i class="fas fa-book-open"></i> روايات</li>
+    </ul>
+</div>
+
+<div class="main-wrapper">
+    <div class="container">
+        <aside class="sidebar">
+            <h3><i class="fas fa-tags"></i> أنواع الكتب</h3>
+            <ul class="category-list" id="categoryList">
+                <li class="category-item active" data-category="all"><i class="fas fa-book"></i> جميع الكتب</li>
+                <li class="category-item" data-category="religious"><i class="fas fa-mosque"></i> دينية</li>
+                <li class="category-item" data-category="romance"><i class="fas fa-heart"></i> رومانسية</li>
+                <li class="category-item" data-category="fiction"><i class="fas fa-dragon"></i> أدب خيالي</li>
+                <li class="category-item" data-category="development"><i class="fas fa-chart-line"></i> تطوير ذات</li>
+                <li class="category-item" data-category="horror"><i class="fas fa-skull"></i> رعب</li>
+                <li class="category-item" data-category="novels"><i class="fas fa-book-open"></i> روايات</li>
+            </ul>
+        </aside>
+
+        <main class="books-section">
+            <h2 id="sectionTitle">جميع الكتب</h2>
+            <div class="books-grid" id="booksGrid"></div>
+        </main>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // قاعدة بيانات الكتب
+    // ============================================
+    const books = [
+        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", category: "novels", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج رواية عن الشفاء والتحوّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في بيت حكي ليبدأن معًا رحلة علاجية فريدة.", coverImage: "/img.png" },
+        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", category: "horror", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية. تضم قصصًا مثل 'أطفال الذرة'.", coverImage: "/img.png" },
+        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", category: "fiction", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها. لكنه يقابل الشابة الغامضة مينوس.", coverImage: "/img.png" },
+        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", category: "novels", price: 1100, available: true, summary: "رواية علامة فارقة في الأدب العربي تدور حول الصراع الثقافي والنفسي بين الشرق والغرب.", coverImage: "/img.png" },
+        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", category: "fiction", price: 6000, available: true, summary: "رواية حول قوة الفن البناء وقوة العنف الهادمة. قصة رسام يكتشف لوحة غامضة في سقيفة منزل.", coverImage: "/img.png" },
+        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", category: "romance", price: 2000, available: false, summary: "رواية واقعية تروي قصة فاني برايس، الفتاة الفقيرة التي تنتقل للعيش مع أقاربها الأثرياء.", coverImage: "/img.png" },
+        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", category: "development", price: 2800, available: true, summary: "كتاب علمي شهير عن النوم من تأليف عالم الأعصاب ماثيو ووكر، يشرح أهمية النوم لصحة الإنسان.", coverImage: "/img.png" },
+        { id: 8, title: "كاري", author: "ستيفن كينغ", category: "horror", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة والانتقام.", coverImage: "/img.png" },
+        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", category: "novels", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "/img.png" },
+        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", category: "fiction", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات. قصة شيقة عن أمنيات تتحقق.", coverImage: "/img.png" },
+        { id: 11, title: "الأثر", author: "طارق عمران", category: "development", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف وترك بصمة في الحياة.", coverImage: "/img.png" },
+        { id: 12, title: "أيام الله", author: "أحمد خيري", category: "religious", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى ومعانيها في حياتنا.", coverImage: "/img.png" }
+    ];
+
+    // ============================================
+    // دوال السلة
+    // ============================================
+    function getCart() {
+        const c = localStorage.getItem('bookCart');
+        return c ? JSON.parse(c) : [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('bookCart', JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function addToCart(bookId) {
+        const book = books.find(b => b.id === bookId);
+        if (!book || !book.available) return false;
+        let cart = getCart();
+        const existing = cart.find(i => i.id === bookId);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ id: bookId, title: book.title, price: book.price, quantity: 1 });
+        }
+        saveCart(cart);
+        showNotification(`📖 تم إضافة "${book.title}" إلى السلة`);
+        return true;
+    }
+
+    function getCartItemCount() {
+        return getCart().reduce((c, i) => c + i.quantity, 0);
+    }
+
+    function updateCartCount() {
+        const count = getCartItemCount();
+        document.querySelectorAll('#cartCount').forEach(el => {
+            if (el) el.textContent = count;
+        });
+    }
+
+    function showNotification(msg) {
+        const n = document.createElement('div');
+        n.textContent = msg;
+        n.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--available-bg);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            z-index: 3000;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-md);
+            animation: slideIn 0.3s ease;
+            direction: rtl;
+        `;
+        document.body.appendChild(n);
+        setTimeout(() => {
+            n.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => n.remove(), 300);
+        }, 2500);
+    }
+
+    // ============================================
+    // عرض الكتب والتصنيفات
+    // ============================================
+    let currentCategory = 'all';
+
+    function renderBooks() {
+        const filtered = currentCategory === 'all' ? books : books.filter(b => b.category === currentCategory);
+        const grid = document.getElementById('booksGrid');
+        
+        if (filtered.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; padding:2rem; color:var(--text-muted);">لا توجد كتب في هذا التصنيف</p>';
+            return;
+        }
+        
+        grid.innerHTML = filtered.map(book => `
+            <a href="/book-details.html?id=${book.id}" class="book-card">
+                <div class="book-cover">
+                    <img src="${book.coverImage}" alt="${book.title}" class="book-cover-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <i class="fas fa-book-open" style="display: none; font-size: 3rem;"></i>
+                    <span class="book-status ${book.available ? 'status-available' : 'status-out'}">
+                        ${book.available ? 'متوفر' : 'نفدت الكمية'}
+                    </span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-author">✍️ ${book.author}</p>
+                    <p class="book-summary">${book.summary.substring(0, 80)}${book.summary.length > 80 ? '...' : ''}</p>
+                    <div class="book-price">${book.price} دج</div>
+                    <button class="add-to-cart-btn" onclick="event.preventDefault(); event.stopPropagation(); addToCart(${book.id});" ${!book.available ? 'disabled' : ''}>
+                        ${book.available ? '🛒 أضف إلى السلة' : '❌ غير متوفر'}
+                    </button>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    function setupCategories() {
+        const cats = document.querySelectorAll('#categoryList .category-item');
+        const mobileCats = document.querySelectorAll('#mobileCategoryList .mobile-category-item');
+        
+        function updateActive(cat) {
+            cats.forEach(c => {
+                if (c.dataset.category === cat) c.classList.add('active');
+                else c.classList.remove('active');
+            });
+            mobileCats.forEach(c => {
+                if (c.dataset.category === cat) c.classList.add('active');
+                else c.classList.remove('active');
+            });
+        }
+        
+        function handleClick(cat) {
+            currentCategory = cat;
+            const names = {
+                'all': 'جميع الكتب',
+                'religious': 'دينية',
+                'romance': 'رومانسية',
+                'fiction': 'أدب خيالي',
+                'development': 'تطوير ذات',
+                'horror': 'رعب',
+                'novels': 'روايات'
+            };
+            document.getElementById('sectionTitle').textContent = names[cat] || 'جميع الكتب';
+            renderBooks();
+            updateActive(cat);
+            closeMobileSidebar();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        cats.forEach(c => c.addEventListener('click', () => handleClick(c.dataset.category)));
+        mobileCats.forEach(c => c.addEventListener('click', () => handleClick(c.dataset.category)));
+    }
+
+    // ============================================
+    // القائمة الجانبية للهواتف
+    // ============================================
+    function openMobileSidebar() {
+        document.getElementById('mobileSidebar').classList.add('open');
+        document.getElementById('sidebarOverlay').style.display = 'block';
+        document.body.classList.add('sidebar-open');
+    }
+
+    function closeMobileSidebar() {
+        document.getElementById('mobileSidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').style.display = 'none';
+        document.body.classList.remove('sidebar-open');
+    }
+
+    // ============================================
+    // الثيم (الوضع الليلي والنهاري)
+    // ============================================
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const themeBtn = document.getElementById('themeToggle');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+        } else if (savedTheme === 'light') {
+            document.body.classList.remove('dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                document.body.classList.add('dark');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+            } else {
+                document.body.classList.remove('dark');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        const isDark = document.body.classList.contains('dark');
+        const themeBtn = document.getElementById('themeToggle');
+        
+        if (isDark) {
+            document.body.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+            showNotification('☀️ تم التبديل إلى الوضع النهاري');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+            showNotification('🌙 تم التبديل إلى الوضع الليلي');
+        }
+    }
+
+    // ============================================
+    // تشغيل الموقع
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        renderBooks();
+        setupCategories();
+        updateCartCount();
+        
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('fabMenuBtn').addEventListener('click', openMobileSidebar);
+        document.getElementById('closeSidebarBtn').addEventListener('click', closeMobileSidebar);
+        document.getElementById('sidebarOverlay').addEventListener('click', closeMobileSidebar);
+        
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'bookCart') updateCartCount();
+        });
+    });
+</script>
+</body>
+</html>

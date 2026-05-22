@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>تفاصيل الكتاب - متجر ماري للكتب</title>
+    <link rel="icon" type="image/png" href="/img.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* ============================================ */
+        /* الوضع النهاري (Light Mode) */
+        /* ============================================ */
+        :root {
+            --bg-body: linear-gradient(135deg, #fef9f0 0%, #fdf0e0 100%);
+            --bg-card: #ffffff;
+            --bg-header: linear-gradient(135deg, #2c1810 0%, #3d2317 100%);
+            --text-primary: #2c1810;
+            --text-secondary: #5a3a2a;
+            --text-muted: #8b6b5a;
+            --text-white: #ffffff;
+            --color-primary: #c97e5a;
+            --color-primary-dark: #b85c3a;
+            --btn-gradient: linear-gradient(135deg, #c97e5a, #b85c3a);
+            --btn-hover: #a04e2e;
+            --border-color: #f0e4d8;
+            --shadow-sm: 0 4px 15px rgba(44, 24, 16, 0.05);
+            --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.08);
+            --available-bg: #27ae60;
+            --outofstock-bg: #e74c3c;
+            --instagram: #E4405F;
+            --instagram-hover: #c1354d;
+            --whatsapp: #25D366;
+            --facebook: #1877F2;
+            --xcolor: #000000;
+            --copy: #607D8B;
+        }
+
+        /* ============================================ */
+        /* الوضع الليلي (Dark Mode) */
+        /* ============================================ */
+        body.dark {
+            --bg-body: linear-gradient(135deg, #12121a 0%, #1a1a2e 100%);
+            --bg-card: #232338;
+            --bg-header: linear-gradient(135deg, #0a0a12 0%, #12121a 100%);
+            --text-primary: #f0f0f5;
+            --text-secondary: #b8b8d0;
+            --text-muted: #8888a0;
+            --text-white: #ffffff;
+            --color-primary: #e8955a;
+            --color-primary-dark: #d47a45;
+            --btn-gradient: linear-gradient(135deg, #e8955a, #d47a45);
+            --btn-hover: #c06535;
+            --border-color: #33334a;
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --available-bg: #2ecc71;
+            --outofstock-bg: #e74c3c;
+            --instagram: #E4405F;
+            --instagram-hover: #c1354d;
+            --whatsapp: #25D366;
+            --facebook: #1877F2;
+            --xcolor: #ffffff;
+            --copy: #607D8B;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        /* ============================================ */
+        /* الهيدر */
+        /* ============================================ */
+        .header {
+            background: var(--bg-header);
+            padding: 0.7rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1rem;
+            background: linear-gradient(135deg, #f0b27a, #c0392b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theme-toggle, .instagram-link, .cart-link, .back-link {
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            border-radius: 40px;
+            padding: 0.35rem 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-white);
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover, .cart-link:hover, .back-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .instagram-link {
+            background: var(--instagram);
+        }
+
+        .instagram-link:hover {
+            background: var(--instagram-hover);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            background: var(--color-primary);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            min-width: 18px;
+            text-align: center;
+            color: white;
+        }
+
+        /* ============================================ */
+        /* تفاصيل الكتاب */
+        /* ============================================ */
+        .details-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .details-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .details-cover {
+            height: 380px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #1a1a2e;
+        }
+
+        .details-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-available {
+            background: var(--available-bg);
+        }
+
+        .status-out {
+            background: var(--outofstock-bg);
+        }
+
+        .details-info {
+            padding: 2rem;
+        }
+
+        .details-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .details-author {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .details-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin: 1rem 0;
+        }
+
+        .details-summary {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* ============================================ */
+        /* أزرار المشاركة */
+        /* ============================================ */
+        .share-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-body);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .share-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .share-whatsapp {
+            background: var(--whatsapp);
+        }
+
+        .share-facebook {
+            background: var(--facebook);
+        }
+
+        .share-x {
+            background: var(--xcolor);
+        }
+
+        body.dark .share-x {
+            background: #333;
+            color: white;
+        }
+
+        .share-copy {
+            background: var(--copy);
+        }
+
+        /* ============================================ */
+        /* زر الإضافة إلى السلة */
+        /* ============================================ */
+        .add-to-cart-details {
+            width: 100%;
+            padding: 14px;
+            background: var(--btn-gradient);
+            border: none;
+            color: white;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-details:hover:not(:disabled) {
+            transform: scale(1.02);
+            background: var(--btn-hover);
+        }
+
+        .add-to-cart-details:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            transform: translateX(-5px);
+            color: var(--color-primary-dark);
+        }
+
+        /* ============================================ */
+        /* تصميم متجاوب */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .details-cover {
+                height: 280px;
+            }
+            
+            .details-info {
+                padding: 1.5rem;
+            }
+            
+            .details-title {
+                font-size: 1.4rem;
+            }
+            
+            .details-price {
+                font-size: 1.4rem;
+            }
+            
+            .share-buttons {
+                gap: 0.5rem;
+            }
+            
+            .share-btn {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+            
+            .theme-toggle span,
+            .instagram-link span,
+            .cart-link span {
+                display: none;
+            }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <a href="/" class="logo">
+            <img src="/img.png" alt="شعار" class="logo-img" onerror="this.style.display='none';">
+            <div class="logo-text"><h1>📚 متجر ماري للكتب</h1></div>
+        </a>
+        <div class="header-actions">
+            <a href="https://www.instagram.com/marie__books_/" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram"></i>
+                <span>إنستغرام</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>ليلي</span>
+            </button>
+            <a href="/cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>السلة</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="details-container">
+    <div class="details-card" id="detailsCard">
+        <div class="details-cover" id="detailsCover"></div>
+        <div class="details-info" id="detailsInfo"></div>
+    </div>
+    <a href="/" class="back-home">← العودة إلى المتجر</a>
+</div>
+
+<script>
+    // ============================================
+    // قاعدة بيانات الكتب
+    // ============================================
+    const books = [
+        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج \"وَشْمٌ أزرق\" حكاية نِسْويَّة عن الشفاء والتحوُّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في \"بيت حَكْي\" ليبدأن معًا رحلة علاجية فريدة.", coverImage: "/img.png" },
+        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية.", coverImage: "/img.png" },
+        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها.", coverImage: "/img.png" },
+        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", price: 1100, available: true, summary: "رواية \"موسم الهجرة إلى الشمال\" (1966) للأديب السوداني الطيب صالح تُعد علامة فارقة في الأدب العربي.", coverImage: "/img.png" },
+        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", price: 6000, available: true, summary: "رسَّام متمكِّن من التقاط الأسرار المتخفِّية خلف وجوه الأشخاص الذين يرسمهم.", coverImage: "/img.png" },
+        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", price: 2000, available: false, summary: "\"مانسفيلد بارك\" (1814) هي رواية واقعية لجين أوستن تروي قصة فاني برايس.", coverImage: "/img.png" },
+        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", price: 2800, available: true, summary: "لماذا ننام: العلم الجديد للنوم والأحلام هو كتاب علمي شهير.", coverImage: "/img.png" },
+        { id: 8, title: "كاري", author: "ستيفن كينغ", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة.", coverImage: "/img.png" },
+        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "/img.png" },
+        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات.", coverImage: "/img.png" },
+        { id: 11, title: "الأثر", author: "طارق عمران", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف.", coverImage: "/img.png" },
+        { id: 12, title: "أيام الله", author: "أحمد خيري", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى.", coverImage: "/img.png" }
+    ];
+
+    // ============================================
+    // دوال السلة
+    // ============================================
+    function getCart() {
+        const c = localStorage.getItem('bookCart');
+        return c ? JSON.parse(c) : [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('bookCart', JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function addToCart(bookId) {
+        const book = books.find(b => b.id === bookId);
+        if (!book || !book.available) return false;
+        let cart = getCart();
+        const existing = cart.find(i => i.id === bookId);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ id: bookId, title: book.title, price: book.price, quantity: 1 });
+        }
+        saveCart(cart);
+        showNotification(`📖 تم إضافة "${book.title}" إلى السلة`);
+        return true;
+    }
+
+    function getCartItemCount() {
+        return getCart().reduce((c, i) => c + i.quantity, 0);
+    }
+
+    function updateCartCount() {
+        const count = getCartItemCount();
+        document.querySelectorAll('#cartCount').forEach(el => {
+            if (el) el.textContent = count;
+        });
+    }
+
+    function showNotification(msg) {
+        const n = document.createElement('div');
+        n.textContent = msg;
+        n.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--available-bg);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            z-index: 3000;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-md);
+            animation: slideIn 0.3s ease;
+            direction: rtl;
+        `;
+        document.body.appendChild(n);
+        setTimeout(() => {
+            n.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => n.remove(), 300);
+        }, 2500);
+    }
+
+    // ============================================
+    // مشاركة الكتاب
+    // ============================================
+    function shareBook(platform, book) {
+        const bookUrl = `${window.location.origin}/book-details.html?id=${book.id}`;
+        const text = encodeURIComponent(`📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!`);
+        
+        if (platform === 'copy') {
+            navigator.clipboard.writeText(`${book.title} - ${book.author} - ${book.price} دج\n${bookUrl}`);
+            showNotification('✅ تم نسخ رابط الكتاب إلى الحافظة');
+        } else {
+            const shareUrls = {
+                whatsapp: `https://wa.me/?text=${text} ${encodeURIComponent(bookUrl)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(bookUrl)}&quote=${text}`,
+                x: `https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(bookUrl)}`
+            };
+            if (shareUrls[platform]) {
+                window.open(shareUrls[platform], '_blank', 'width=600,height=500');
+            }
+        }
+    }
+
+    // ============================================
+    // عرض تفاصيل الكتاب
+    // ============================================
+    function loadBookDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = parseInt(urlParams.get('id'));
+        const book = books.find(b => b.id === bookId);
+        
+        if (!book) {
+            document.getElementById('detailsCard').innerHTML = `
+                <div style="text-align:center;padding:3rem;">
+                    <i class="fas fa-book-open" style="font-size:3rem;opacity:0.5;"></i>
+                    <p style="margin-top:1rem;">الكتاب غير موجود</p>
+                    <a href="/" class="back-home">العودة للمتجر</a>
+                </div>
+            `;
+            return;
+        }
+        
+        document.getElementById('detailsCover').innerHTML = `
+            <img src="${book.coverImage}" alt="${book.title}" class="details-cover-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <i class="fas fa-book-open" style="display:none; font-size:4rem;"></i>
+            <span class="details-status ${book.available ? 'status-available' : 'status-out'}">
+                ${book.available ? 'متوفر' : 'نفدت الكمية'}
+            </span>
+        `;
+        
+        document.getElementById('detailsInfo').innerHTML = `
+            <h1 class="details-title">📖 ${book.title}</h1>
+            <p class="details-author">✍️ ${book.author}</p>
+            <div class="details-price">${book.price} دج</div>
+            <div class="details-summary">
+                <strong>📝 نبذة عن الكتاب:</strong><br><br>
+                ${book.summary}
+            </div>
+            
+            <div class="share-section">
+                <div class="share-title">
+                    <i class="fas fa-share-alt"></i> مشاركة الكتاب
+                </div>
+                <div class="share-buttons">
+                    <button class="share-btn share-whatsapp" onclick="shareBook('whatsapp', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fab fa-whatsapp"></i> واتساب
+                    </button>
+                    <button class="share-btn share-facebook" onclick="shareBook('facebook', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fab fa-facebook-f"></i> فيسبوك
+                    </button>
+                    <button class="share-btn share-x" onclick="shareBook('x', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fab fa-x-twitter"></i> X
+                    </button>
+                    <button class="share-btn share-copy" onclick="shareBook('copy', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fas fa-copy"></i> نسخ الرابط
+                    </button>
+                </div>
+            </div>
+            
+            <button class="add-to-cart-details" id="detailsAddToCart" ${!book.available ? 'disabled' : ''}>
+                ${book.available ? '🛒 إضافة إلى السلة' : '❌ الكتاب غير متوفر حالياً'}
+            </button>
+        `;
+        
+        const addBtn = document.getElementById('detailsAddToCart');
+        if (addBtn) {
+            addBtn.addEventListener('click', () => addToCart(book.id));
+        }
+    }
+
+    // ============================================
+    // الثيم
+    // ============================================
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const themeBtn = document.getElementById('themeToggle');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+        } else if (savedTheme === 'light') {
+            document.body.classList.remove('dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                document.body.classList.add('dark');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+            } else {
+                document.body.classList.remove('dark');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        const isDark = document.body.classList.contains('dark');
+        const themeBtn = document.getElementById('themeToggle');
+        
+        if (isDark) {
+            document.body.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-moon"></i><span>ليلي</span>';
+            showNotification('☀️ تم التبديل إلى الوضع النهاري');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i><span>نهاري</span>';
+            showNotification('🌙 تم التبديل إلى الوضع الليلي');
+        }
+    }
+
+    // ============================================
+    // تشغيل الصفحة
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        loadBookDetails();
+        updateCartCount();
+        
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'bookCart') updateCartCount();
+        });
+    });
+</script>
+</body>
+</html>
