@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>تفاصيل الكتاب - متجر ماري للكتب</title>
-    <link rel="icon" type="image/png" href="img.png">
+    <link rel="icon" type="image/png" href="./img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -409,8 +409,8 @@
 
 <div class="header">
     <div class="header-content">
-        <a href="index.html" class="logo">
-            <img src="img.png" alt="شعار" class="logo-img" onerror="this.style.display='none';">
+        <a href="./index.html" class="logo">
+            <img src="./img.png" alt="شعار" class="logo-img" onerror="this.style.display='none';">
             <div class="logo-text"><h1>📚 متجر ماري للكتب</h1></div>
         </a>
         <div class="header-actions">
@@ -422,7 +422,7 @@
                 <i class="fas fa-moon"></i>
                 <span>ليلي</span>
             </button>
-            <a href="cart.html" class="cart-link">
+            <a href="./cart.html" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 <span>السلة</span>
                 <span class="cart-count" id="cartCount">0</span>
@@ -436,7 +436,7 @@
         <div class="details-cover" id="detailsCover"></div>
         <div class="details-info" id="detailsInfo"></div>
     </div>
-    <a href="index.html" class="back-home">← العودة إلى المتجر</a>
+    <a href="./index.html" class="back-home">← العودة إلى المتجر</a>
 </div>
 
 <script>
@@ -444,18 +444,18 @@
     // قاعدة بيانات الكتب
     // ============================================
     const books = [
-        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج \"وَشْمٌ أزرق\" حكاية نِسْويَّة عن الشفاء والتحوُّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في \"بيت حَكْي\" ليبدأن معًا رحلة علاجية فريدة.", coverImage: "img.png" },
-        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية.", coverImage: "img.png" },
-        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها.", coverImage: "img.png" },
-        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", price: 1100, available: true, summary: "رواية \"موسم الهجرة إلى الشمال\" (1966) للأديب السوداني الطيب صالح تُعد علامة فارقة في الأدب العربي.", coverImage: "img.png" },
-        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", price: 6000, available: true, summary: "رسَّام متمكِّن من التقاط الأسرار المتخفِّية خلف وجوه الأشخاص الذين يرسمهم.", coverImage: "img.png" },
-        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", price: 2000, available: false, summary: "\"مانسفيلد بارك\" (1814) هي رواية واقعية لجين أوستن تروي قصة فاني برايس.", coverImage: "img.png" },
-        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", price: 2800, available: true, summary: "لماذا ننام: العلم الجديد للنوم والأحلام هو كتاب علمي شهير.", coverImage: "img.png" },
-        { id: 8, title: "كاري", author: "ستيفن كينغ", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة.", coverImage: "img.png" },
-        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "img.png" },
-        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات.", coverImage: "img.png" },
-        { id: 11, title: "الأثر", author: "طارق عمران", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف.", coverImage: "img.png" },
-        { id: 12, title: "أيام الله", author: "أحمد خيري", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى.", coverImage: "img.png" }
+        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج \"وَشْمٌ أزرق\" حكاية نِسْويَّة عن الشفاء والتحوُّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في \"بيت حَكْي\" ليبدأن معًا رحلة علاجية فريدة.", coverImage: "./img.png" },
+        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية.", coverImage: "./img.png" },
+        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها.", coverImage: "./img.png" },
+        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", price: 1100, available: true, summary: "رواية \"موسم الهجرة إلى الشمال\" (1966) للأديب السوداني الطيب صالح تُعد علامة فارقة في الأدب العربي.", coverImage: "./img.png" },
+        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", price: 6000, available: true, summary: "رسَّام متمكِّن من التقاط الأسرار المتخفِّية خلف وجوه الأشخاص الذين يرسمهم.", coverImage: "./img.png" },
+        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", price: 2000, available: false, summary: "\"مانسفيلد بارك\" (1814) هي رواية واقعية لجين أوستن تروي قصة فاني برايس.", coverImage: "./img.png" },
+        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", price: 2800, available: true, summary: "لماذا ننام: العلم الجديد للنوم والأحلام هو كتاب علمي شهير.", coverImage: "./img.png" },
+        { id: 8, title: "كاري", author: "ستيفن كينغ", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة.", coverImage: "./img.png" },
+        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "./img.png" },
+        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات.", coverImage: "./img.png" },
+        { id: 11, title: "الأثر", author: "طارق عمران", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف.", coverImage: "./img.png" },
+        { id: 12, title: "أيام الله", author: "أحمد خيري", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى.", coverImage: "./img.png" }
     ];
 
     // ============================================
@@ -557,7 +557,7 @@
                 <div style="text-align:center;padding:3rem;">
                     <i class="fas fa-book-open" style="font-size:3rem;opacity:0.5;"></i>
                     <p style="margin-top:1rem;">الكتاب غير موجود</p>
-                    <a href="index.html" class="back-home">العودة للمتجر</a>
+                    <a href="./index.html" class="back-home">العودة للمتجر</a>
                 </div>
             `;
             return;
