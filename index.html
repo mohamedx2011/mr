@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>متجر ماري للكتب - Mary's Bookstore</title>
-    <link rel="icon" type="image/png" href="/img.png">
-    <link rel="apple-touch-icon" href="/img.png">
+    <link rel="icon" type="image/png" href="img.png">
+    <link rel="apple-touch-icon" href="img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -17,88 +17,63 @@
         }
 
         /* ============================================ */
-        /* الوضع النهاري (Light Mode) - ألوان دافئة متناسقة */
+        /* الوضع النهاري (Light Mode) */
         /* ============================================ */
         :root {
-            /* الخلفيات */
             --bg-body: linear-gradient(135deg, #fef9f0 0%, #fdf0e0 100%);
             --bg-card: #ffffff;
             --bg-sidebar: #ffffff;
             --bg-header: linear-gradient(135deg, #2c1810 0%, #3d2317 100%);
-            
-            /* النصوص */
             --text-primary: #2c1810;
             --text-secondary: #5a3a2a;
             --text-muted: #8b6b5a;
             --text-white: #ffffff;
-            
-            /* الألوان الأساسية */
             --color-primary: #c97e5a;
             --color-primary-dark: #b85c3a;
             --color-primary-light: #e8a87c;
-            
-            /* الأزرار */
             --btn-gradient: linear-gradient(135deg, #c97e5a, #b85c3a);
             --btn-hover: #a04e2e;
-            
-            /* الحدود والظلال */
             --border-color: #f0e4d8;
             --shadow-sm: 0 4px 15px rgba(44, 24, 16, 0.05);
             --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.08);
             --shadow-lg: 0 8px 30px rgba(44, 24, 16, 0.12);
-            
-            /* حالة الكتب */
             --available-bg: #27ae60;
             --outofstock-bg: #e74c3c;
-            
-            /* التصنيفات */
             --category-hover: #fdf0e4;
             --category-active: linear-gradient(135deg, #c97e5a, #b85c3a);
-            
-            /* القوائم الجانبية */
             --overlay-bg: rgba(44, 24, 16, 0.5);
             --fab-bg: #c97e5a;
-            
-            /* روابط التواصل */
             --instagram: #E4405F;
             --instagram-hover: #c1354d;
         }
 
         /* ============================================ */
-        /* الوضع الليلي (Dark Mode) - ألوان هادئة متناسقة */
+        /* الوضع الليلي (Dark Mode) */
         /* ============================================ */
         body.dark {
             --bg-body: linear-gradient(135deg, #12121a 0%, #1a1a2e 100%);
             --bg-card: #232338;
             --bg-sidebar: #232338;
             --bg-header: linear-gradient(135deg, #0a0a12 0%, #12121a 100%);
-            
             --text-primary: #f0f0f5;
             --text-secondary: #b8b8d0;
             --text-muted: #8888a0;
             --text-white: #ffffff;
-            
             --color-primary: #e8955a;
             --color-primary-dark: #d47a45;
             --color-primary-light: #f0b080;
-            
             --btn-gradient: linear-gradient(135deg, #e8955a, #d47a45);
             --btn-hover: #c06535;
-            
             --border-color: #33334a;
             --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
             --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
-            
             --available-bg: #2ecc71;
             --outofstock-bg: #e74c3c;
-            
             --category-hover: #2a2a3e;
             --category-active: linear-gradient(135deg, #e8955a, #d47a45);
-            
             --overlay-bg: rgba(0, 0, 0, 0.7);
             --fab-bg: #e8955a;
-            
             --instagram: #E4405F;
             --instagram-hover: #c1354d;
         }
@@ -669,8 +644,8 @@
 
 <div class="header">
     <div class="header-content">
-        <a href="/" class="logo">
-            <img src="/img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
+        <a href="index.html" class="logo">
+            <img src="img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
             <div class="logo-text">
                 <h1>📚 متجر ماري للكتب</h1>
                 <p>Mary's Bookstore</p>
@@ -685,7 +660,7 @@
                 <i class="fas fa-moon"></i>
                 <span>ليلي</span>
             </button>
-            <a href="/cart.html" class="cart-link">
+            <a href="cart.html" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 <span>السلة</span>
                 <span class="cart-count" id="cartCount">0</span>
@@ -745,18 +720,18 @@
     // قاعدة بيانات الكتب
     // ============================================
     const books = [
-        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", category: "novels", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج رواية عن الشفاء والتحوّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في بيت حكي ليبدأن معًا رحلة علاجية فريدة.", coverImage: "/img.png" },
-        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", category: "horror", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية. تضم قصصًا مثل 'أطفال الذرة'.", coverImage: "/img.png" },
-        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", category: "fiction", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها. لكنه يقابل الشابة الغامضة مينوس.", coverImage: "/img.png" },
-        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", category: "novels", price: 1100, available: true, summary: "رواية علامة فارقة في الأدب العربي تدور حول الصراع الثقافي والنفسي بين الشرق والغرب.", coverImage: "/img.png" },
-        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", category: "fiction", price: 6000, available: true, summary: "رواية حول قوة الفن البناء وقوة العنف الهادمة. قصة رسام يكتشف لوحة غامضة في سقيفة منزل.", coverImage: "/img.png" },
-        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", category: "romance", price: 2000, available: false, summary: "رواية واقعية تروي قصة فاني برايس، الفتاة الفقيرة التي تنتقل للعيش مع أقاربها الأثرياء.", coverImage: "/img.png" },
-        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", category: "development", price: 2800, available: true, summary: "كتاب علمي شهير عن النوم من تأليف عالم الأعصاب ماثيو ووكر، يشرح أهمية النوم لصحة الإنسان.", coverImage: "/img.png" },
-        { id: 8, title: "كاري", author: "ستيفن كينغ", category: "horror", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة والانتقام.", coverImage: "/img.png" },
-        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", category: "novels", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "/img.png" },
-        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", category: "fiction", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات. قصة شيقة عن أمنيات تتحقق.", coverImage: "/img.png" },
-        { id: 11, title: "الأثر", author: "طارق عمران", category: "development", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف وترك بصمة في الحياة.", coverImage: "/img.png" },
-        { id: 12, title: "أيام الله", author: "أحمد خيري", category: "religious", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى ومعانيها في حياتنا.", coverImage: "/img.png" }
+        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", category: "novels", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج رواية عن الشفاء والتحوّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في بيت حكي ليبدأن معًا رحلة علاجية فريدة.", coverImage: "img.png" },
+        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", category: "horror", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية. تضم قصصًا مثل 'أطفال الذرة'.", coverImage: "img.png" },
+        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", category: "fiction", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها. لكنه يقابل الشابة الغامضة مينوس.", coverImage: "img.png" },
+        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", category: "novels", price: 1100, available: true, summary: "رواية علامة فارقة في الأدب العربي تدور حول الصراع الثقافي والنفسي بين الشرق والغرب.", coverImage: "img.png" },
+        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", category: "fiction", price: 6000, available: true, summary: "رواية حول قوة الفن البناء وقوة العنف الهادمة. قصة رسام يكتشف لوحة غامضة في سقيفة منزل.", coverImage: "img.png" },
+        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", category: "romance", price: 2000, available: false, summary: "رواية واقعية تروي قصة فاني برايس، الفتاة الفقيرة التي تنتقل للعيش مع أقاربها الأثرياء.", coverImage: "img.png" },
+        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", category: "development", price: 2800, available: true, summary: "كتاب علمي شهير عن النوم من تأليف عالم الأعصاب ماثيو ووكر، يشرح أهمية النوم لصحة الإنسان.", coverImage: "img.png" },
+        { id: 8, title: "كاري", author: "ستيفن كينغ", category: "horror", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة والانتقام.", coverImage: "img.png" },
+        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", category: "novels", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "img.png" },
+        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", category: "fiction", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات. قصة شيقة عن أمنيات تتحقق.", coverImage: "img.png" },
+        { id: 11, title: "الأثر", author: "طارق عمران", category: "development", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف وترك بصمة في الحياة.", coverImage: "img.png" },
+        { id: 12, title: "أيام الله", author: "أحمد خيري", category: "religious", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى ومعانيها في حياتنا.", coverImage: "img.png" }
     ];
 
     // ============================================
@@ -838,7 +813,7 @@
         }
         
         grid.innerHTML = filtered.map(book => `
-            <a href="/book-details.html?id=${book.id}" class="book-card">
+            <a href="book-details.html?id=${book.id}" class="book-card">
                 <div class="book-cover">
                     <img src="${book.coverImage}" alt="${book.title}" class="book-cover-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <i class="fas fa-book-open" style="display: none; font-size: 3rem;"></i>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>سلة المشتريات - متجر ماري للكتب</title>
-    <link rel="icon" type="image/png" href="/img.png">
+    <link rel="icon" type="image/png" href="img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -544,8 +544,8 @@
 
 <div class="header">
     <div class="header-content">
-        <a href="/" class="logo">
-            <img src="/img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
+        <a href="index.html" class="logo">
+            <img src="img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
             <h1>📚 متجر ماري للكتب</h1>
         </a>
         <div class="header-actions">
@@ -557,7 +557,7 @@
                 <i class="fas fa-moon"></i>
                 <span>ليلي</span>
             </button>
-            <a href="/" class="back-link">
+            <a href="index.html" class="back-link">
                 <i class="fas fa-arrow-right"></i>
                 <span>العودة</span>
             </a>
@@ -571,7 +571,7 @@
         <div id="cartItemsList"></div>
         <div id="cartSummary"></div>
         <div class="buttons-row">
-            <a href="/" class="btn btn-primary">↩️ متابعة التسوق</a>
+            <a href="index.html" class="btn btn-primary">↩️ متابعة التسوق</a>
             <button id="checkoutCartBtn" class="btn btn-success">✅ إتمام الشراء</button>
             <button id="invoiceBtn" class="btn btn-secondary">📄 عمل فاتورة</button>
             <button id="clearCartBtn" class="btn btn-danger">🗑️ تفريغ السلة</button>
@@ -684,7 +684,7 @@
                 <div class="empty-cart">
                     <i class="fas fa-shopping-basket"></i>
                     <p>سلة المشتريات فارغة</p>
-                    <a href="/" class="btn btn-primary" style="display: inline-block; text-decoration: none;">🛍️ تسوق الآن</a>
+                    <a href="index.html" class="btn btn-primary" style="display: inline-block; text-decoration: none;">🛍️ تسوق الآن</a>
                 </div>
             `;
             cartSummary.innerHTML = '';
@@ -787,7 +787,7 @@
         
         document.getElementById('invoiceContent').innerHTML = `
             <div class="invoice-header">
-                <img src="/img.png" alt="شعار المتجر" class="invoice-logo" onerror="this.style.display='none';">
+                <img src="img.png" alt="شعار المتجر" class="invoice-logo" onerror="this.style.display='none';">
                 <div class="invoice-title">📚 متجر ماري للكتب</div>
                 <div class="invoice-store">Mary's Bookstore</div>
                 <div style="margin-top: 5px;">فاتورة شراء</div>
@@ -933,11 +933,15 @@
             showNotification('🌙 تم التبديل إلى الوضع الليلي');
         }
     }
+
+    // ============================================
     // تشغيل الصفحة
+    // ============================================
     document.addEventListener('DOMContentLoaded', function() {
         initTheme();
         displayCart();
         updateCartCount();
+        
         document.getElementById('themeToggle').addEventListener('click', toggleTheme);
         document.getElementById('checkoutCartBtn').addEventListener('click', checkout);
         document.getElementById('clearCartBtn').addEventListener('click', clearCart);
@@ -950,6 +954,7 @@
                 document.getElementById('invoiceModal').style.display = 'none';
             }
         });
+        
         window.addEventListener('storage', (e) => {
             if (e.key === 'bookCart') {
                 displayCart();
