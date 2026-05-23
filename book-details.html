@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>سلة المشتريات - متجر ماري للكتب</title>
+    <title>تفاصيل الكتاب - متجر ماري للكتب</title>
     <link rel="icon" type="image/png" href="./img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -31,10 +31,11 @@
             --shadow-sm: 0 4px 15px rgba(44, 24, 16, 0.05);
             --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.08);
             --available-bg: #27ae60;
-            --remove-bg: #e74c3c;
-            --checkout-bg: #27ae60;
+            --outofstock-bg: #e74c3c;
             --instagram: #E4405F;
             --instagram-hover: #c1354d;
+            --whatsapp: #25D366;
+            --copy: #607D8B;
         }
 
         body.dark {
@@ -53,13 +54,17 @@
             --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
             --available-bg: #2ecc71;
-            --remove-bg: #e74c3c;
-            --checkout-bg: #2ecc71;
+            --outofstock-bg: #e74c3c;
+            --instagram: #E4405F;
+            --instagram-hover: #c1354d;
+            --whatsapp: #25D366;
+            --copy: #607D8B;
         }
 
         body {
             background: var(--bg-body);
             color: var(--text-primary);
+            transition: all 0.3s ease;
             min-height: 100vh;
         }
 
@@ -96,7 +101,7 @@
             object-fit: cover;
         }
 
-        .logo h1 {
+        .logo-text h1 {
             font-size: 1rem;
             background: linear-gradient(135deg, #f0b27a, #c0392b);
             -webkit-background-clip: text;
@@ -140,328 +145,219 @@
             transform: translateY(-2px);
         }
 
-        .cart-container {
+        .details-container {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
 
-        .cart-card {
+        .details-card {
             background: var(--bg-card);
             border-radius: 24px;
-            padding: 2rem;
+            overflow: hidden;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
         }
 
-        .cart-card h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+        .details-cover {
+            height: 380px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-item-info {
-            flex: 2;
-            min-width: 120px;
-        }
-
-        .cart-item-title {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-            white-space: nowrap;
+            justify-content: center;
+            position: relative;
             overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 180px;
         }
 
-        .cart-item-price {
+        .details-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #1a1a2e;
+        }
+
+        .details-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-available {
+            background: var(--available-bg);
+        }
+
+        .status-out {
+            background: var(--outofstock-bg);
+        }
+
+        .details-info {
+            padding: 2rem;
+        }
+
+        .details-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .details-author {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .details-price {
+            font-size: 1.8rem;
+            font-weight: bold;
             color: var(--color-primary);
-            font-weight: bold;
-            font-size: 0.8rem;
+            margin: 1rem 0;
         }
 
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .qty-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
+        .details-summary {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
             font-size: 1rem;
         }
 
-        .qty-btn:hover {
-            transform: scale(1.05);
+        .share-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-body);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
         }
 
-        .qty-value {
-            min-width: 35px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        .cart-item-total {
-            font-weight: bold;
-            min-width: 70px;
-            text-align: left;
-            color: var(--color-primary);
-            font-size: 0.9rem;
-        }
-
-        .remove-item {
-            background: var(--remove-bg);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-
-        .remove-item:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
-
-        .empty-cart {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .empty-cart i {
-            font-size: 4rem;
-            opacity: 0.5;
+        .share-title {
+            font-size: 1rem;
             margin-bottom: 1rem;
-            color: var(--text-muted);
-        }
-
-        .empty-cart p {
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .cart-summary {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .total-label {
-            font-size: 1.1rem;
-            font-weight: bold;
             color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .total-amount {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: var(--color-primary);
-        }
-
-        .item-count {
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .buttons-row {
+        .share-buttons {
             display: flex;
             gap: 0.8rem;
-            margin-top: 1.5rem;
             flex-wrap: wrap;
         }
 
-        .btn {
-            text-align: center;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-weight: bold;
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
             font-size: 0.85rem;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
-            text-decoration: none;
-            display: inline-block;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .share-whatsapp {
+            background: var(--whatsapp);
+        }
+
+        .share-instagram {
+            background: var(--instagram);
+        }
+
+        .share-instagram:hover {
+            background: var(--instagram-hover);
+        }
+
+        .share-copy {
+            background: var(--copy);
+        }
+
+        .add-to-cart-details {
+            width: 100%;
+            padding: 14px;
+            background: var(--btn-gradient);
+            border: none;
+            color: white;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 1rem;
             transition: all 0.3s ease;
         }
 
-        .btn:hover {
+        .add-to-cart-details:hover:not(:disabled) {
             transform: scale(1.02);
-            opacity: 0.95;
-        }
-
-        .btn-primary {
-            background: var(--btn-gradient);
-            color: white;
-        }
-
-        .btn-primary:hover {
             background: var(--btn-hover);
         }
 
-        .btn-success {
-            background: var(--checkout-bg);
-            color: white;
+        .add-to-cart-details:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
         }
 
-        .btn-danger {
-            background: var(--remove-bg);
-            color: white;
+        .back-home {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .btn-secondary {
-            background: #3498db;
-            color: white;
+        .back-home:hover {
+            transform: translateX(-5px);
+            color: var(--color-primary-dark);
         }
 
         @media (max-width: 768px) {
-            .cart-card {
-                padding: 1rem;
+            .details-cover {
+                height: 280px;
             }
-            .cart-item {
-                flex-direction: row;
-                flex-wrap: wrap;
+            .details-info {
+                padding: 1.5rem;
+            }
+            .details-title {
+                font-size: 1.4rem;
+            }
+            .details-price {
+                font-size: 1.4rem;
+            }
+            .share-buttons {
                 gap: 0.5rem;
             }
-            .cart-item-info {
-                flex: 1;
-                min-width: 100px;
-            }
-            .cart-item-title {
-                font-size: 0.8rem;
-                max-width: 120px;
-            }
-            .cart-item-price {
+            .share-btn {
+                padding: 8px 12px;
                 font-size: 0.75rem;
-            }
-            .cart-item-quantity {
-                gap: 0.2rem;
-            }
-            .qty-btn {
-                width: 24px;
-                height: 24px;
-                font-size: 0.9rem;
-            }
-            .qty-value {
-                min-width: 28px;
-                font-size: 0.8rem;
-            }
-            .cart-item-total {
-                font-size: 0.8rem;
-                min-width: 60px;
-            }
-            .remove-item {
-                padding: 4px 8px;
-                font-size: 0.65rem;
-            }
-            .header-content {
-                gap: 0.5rem;
-            }
-            .header-actions {
-                gap: 0.3rem;
-            }
-            .theme-toggle, .instagram-link, .home-link {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.7rem;
-            }
-            .logo-img {
-                width: 32px;
-                height: 32px;
-            }
-            .logo h1 {
-                font-size: 0.85rem;
-            }
-            .buttons-row {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
-            }
-            .btn {
-                width: 100%;
-                padding: 10px 8px;
-                font-size: 0.75rem;
-            }
-            .cart-card h1 {
-                font-size: 1.2rem;
-            }
-            .total-amount {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cart-item-title {
-                font-size: 0.7rem;
-                max-width: 90px;
-            }
-            .cart-item-price {
-                font-size: 0.7rem;
-            }
-            .qty-btn {
-                width: 22px;
-                height: 22px;
-                font-size: 0.8rem;
-            }
-            .qty-value {
-                min-width: 24px;
-                font-size: 0.75rem;
-            }
-            .cart-item-total {
-                font-size: 0.75rem;
-                min-width: 50px;
-            }
-            .remove-item {
-                padding: 3px 6px;
-                font-size: 0.6rem;
-            }
-            .theme-toggle, .instagram-link, .home-link {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.65rem;
             }
             .theme-toggle span,
             .instagram-link span,
             .home-link span {
                 display: none;
             }
-            .buttons-row {
-                gap: 0.4rem;
+        }
+
+        @media (max-width: 480px) {
+            .share-buttons {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
             }
-            .btn {
-                padding: 8px 6px;
+            .share-btn {
+                width: 100%;
+                padding: 8px 10px;
                 font-size: 0.7rem;
             }
         }
@@ -482,8 +378,8 @@
 <div class="header">
     <div class="header-content">
         <a href="./" class="logo">
-            <img src="./img.png" alt="متجر ماري للكتب" class="logo-img" onerror="this.style.display='none';">
-            <h1>📚 متجر ماري للكتب</h1>
+            <img src="./img.png" alt="شعار" class="logo-img" onerror="this.style.display='none';">
+            <div class="logo-text"><h1>📚 متجر ماري للكتب</h1></div>
         </a>
         <div class="header-actions">
             <a href="https://www.instagram.com/marie__books_/" target="_blank" class="instagram-link">
@@ -502,21 +398,30 @@
     </div>
 </div>
 
-<div class="cart-container">
-    <div class="cart-card">
-        <h1><i class="fas fa-shopping-cart"></i> سلة المشتريات</h1>
-        <div id="cartItemsList"></div>
-        <div id="cartSummary"></div>
-        <div class="buttons-row">
-            <a href="./" class="btn btn-primary">↩️ متابعة التسوق</a>
-            <button id="checkoutCartBtn" class="btn btn-success">✅ إتمام الشراء</button>
-            <button id="printInvoiceBtn" class="btn btn-secondary">🖨️ طباعة الفاتورة</button>
-            <button id="clearCartBtn" class="btn btn-danger">🗑️ تفريغ</button>
-        </div>
+<div class="details-container">
+    <div class="details-card" id="detailsCard">
+        <div class="details-cover" id="detailsCover"></div>
+        <div class="details-info" id="detailsInfo"></div>
     </div>
+    <a href="./" class="back-home">← العودة إلى المتجر</a>
 </div>
 
 <script>
+    const books = [
+        { id: 1, title: "وشم أزرق", author: "شيماء سمير كامل عاشور", price: 1500, available: true, summary: "في قلب الظلال، حيث تتداخل الوَحْدةُ مع الأمل، تنسج \"وَشْمٌ أزرق\" حكاية نِسْويَّة عن الشفاء والتحوُّل. تلتقي صفا، الإخصائية المعالجة بالفن، بمجموعة من النساء في \"بيت حَكْي\" ليبدأن معًا رحلة علاجية فريدة.", coverImage: "./img.png" },
+        { id: 2, title: "وردية الليل", author: "ستيفن كينغ", price: 2800, available: true, summary: "مجموعة قصصية من أشهر قصص الرعب القصيرة، تحول كثير منها لأفلام سينمائية وتليفزيونية.", coverImage: "./img.png" },
+        { id: 3, title: "مينوس", author: "آني. إم جي. شميت", price: 1500, available: false, summary: "تيبل صحفي على وشك فقدان وظيفته ما لم يجد أخبارًا تستحق الكتابة عنها.", coverImage: "./img.png" },
+        { id: 4, title: "موسم الهجرة الى الشمال", author: "الطيب صالح", price: 1100, available: true, summary: "رواية \"موسم الهجرة إلى الشمال\" (1966) للأديب السوداني الطيب صالح تُعد علامة فارقة في الأدب العربي.", coverImage: "./img.png" },
+        { id: 5, title: "مقتل الكومنداتور", author: "هاروكي موراكامي", price: 6000, available: true, summary: "رسَّام متمكِّن من التقاط الأسرار المتخفِّية خلف وجوه الأشخاص الذين يرسمهم.", coverImage: "./img.png" },
+        { id: 6, title: "مانسفيلد بارك", author: "جين اوستن", price: 2000, available: false, summary: "\"مانسفيلد بارك\" (1814) هي رواية واقعية لجين أوستن تروي قصة فاني برايس.", coverImage: "./img.png" },
+        { id: 7, title: "لماذا ننام", author: "ماثيو ووكر", price: 2800, available: true, summary: "لماذا ننام: العلم الجديد للنوم والأحلام هو كتاب علمي شهير.", coverImage: "./img.png" },
+        { id: 8, title: "كاري", author: "ستيفن كينغ", price: 1800, available: true, summary: "الرواية الأولى لستيفن كينغ، عن التنمر والقدرات الخارقة.", coverImage: "./img.png" },
+        { id: 9, title: "قناع بلون السماء", author: "باسم خندقجي", price: 2600, available: false, summary: "رواية فلسطينية حائزة على الجائزة العالمية للرواية العربية (بوكر) 2024.", coverImage: "./img.png" },
+        { id: 10, title: "شبيك لبيك الجزء 3", author: "دينا محمد يحيى", price: 1600, available: true, summary: "عالم يمكنك فيه بيع وشراء الأمنيات.", coverImage: "./img.png" },
+        { id: 11, title: "الأثر", author: "طارق عمران", price: 2200, available: true, summary: "كتاب ملهم عن تطوير الذات وتحقيق الأهداف.", coverImage: "./img.png" },
+        { id: 12, title: "أيام الله", author: "أحمد خيري", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى.", coverImage: "./img.png" }
+    ];
+
     function getCart() {
         try {
             const cartJson = localStorage.getItem('bookCart');
@@ -532,46 +437,23 @@
     function saveCart(cart) {
         localStorage.setItem('bookCart', JSON.stringify(cart));
         updateCartCount();
+        window.dispatchEvent(new StorageEvent('storage', { key: 'bookCart', newValue: JSON.stringify(cart) }));
     }
 
-    function updateQuantity(bookId, newQuantity) {
-        if (newQuantity < 1) {
-            removeFromCart(bookId);
-            return;
-        }
-        
+    function addToCart(bookId) {
+        const book = books.find(b => b.id === bookId);
+        if (!book || !book.available) return false;
         let cart = getCart();
-        const itemIndex = cart.findIndex(i => i.id === bookId);
-        
-        if (itemIndex !== -1) {
-            cart[itemIndex].quantity = newQuantity;
-            saveCart(cart);
-            displayCart();
-            showNotification('📖 تم تحديث الكمية');
+        const existing = cart.find(i => i.id === bookId);
+        if (existing) {
+            existing.quantity += 1;
+            showNotification(`📖 تم زيادة كمية "${book.title}" إلى ${existing.quantity}`);
+        } else {
+            cart.push({ id: bookId, title: book.title, price: book.price, quantity: 1 });
+            showNotification(`📖 تم إضافة "${book.title}" إلى السلة`);
         }
-    }
-
-    function removeFromCart(bookId) {
-        let cart = getCart();
-        const book = cart.find(i => i.id === bookId);
-        cart = cart.filter(i => i.id !== bookId);
         saveCart(cart);
-        displayCart();
-        if (book) {
-            showNotification(`🗑️ تم إزالة "${book.title}" من السلة`);
-        }
-    }
-
-    function clearCart() {
-        if (confirm('هل أنت متأكد من تفريغ السلة بالكامل؟')) {
-            saveCart([]);
-            displayCart();
-            showNotification('🗑️ تم تفريغ السلة');
-        }
-    }
-
-    function getCartTotal() {
-        return getCart().reduce((t, i) => t + (i.price * i.quantity), 0);
+        return true;
     }
 
     function getCartItemCount() {
@@ -580,8 +462,7 @@
 
     function updateCartCount() {
         const count = getCartItemCount();
-        const cartCountElements = document.querySelectorAll('#cartCount');
-        cartCountElements.forEach(el => {
+        document.querySelectorAll('#cartCount').forEach(el => {
             if (el) el.textContent = count;
         });
     }
@@ -593,7 +474,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--available-bg);
+            background: #27ae60;
             color: white;
             padding: 12px 20px;
             border-radius: 12px;
@@ -611,281 +492,116 @@
         }, 2500);
     }
 
-    function displayCart() {
-        const cart = getCart();
-        const cartItemsDiv = document.getElementById('cartItemsList');
-        const cartSummary = document.getElementById('cartSummary');
+    // ============================================
+    // دوال المشاركة - إرسال للأصدقاء مباشرة
+    // ============================================
+    function shareBook(platform, book) {
+        // بناء الرابط الكامل للكتاب
+        const fullUrl = window.location.origin + window.location.pathname + '?id=' + book.id;
         
-        if (!cartItemsDiv) return;
+        // نص المشاركة الكامل مع اسم المتجر
+        const shareText = `📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!\n\nالرابط: ${fullUrl}`;
+        const encodedText = encodeURIComponent(shareText);
         
-        if (cart.length === 0) {
-            cartItemsDiv.innerHTML = `
-                <div class="empty-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                    <p>سلة المشتريات فارغة</p>
-                    <a href="./" class="btn btn-primary" style="display: inline-block; text-decoration: none;">🛍️ تسوق الآن</a>
+        if (platform === 'copy') {
+            // نسخ النص الكامل مع الرابط
+            navigator.clipboard.writeText(shareText).then(() => {
+                showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+            }).catch(() => {
+                // طريقة بديلة للنسخ إذا فشلت
+                const textarea = document.createElement('textarea');
+                textarea.value = shareText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+            });
+        } 
+        else if (platform === 'whatsapp') {
+            // واتساب - يفتح التطبيق مباشرة مع النص والرابط
+            const waUrl = `https://wa.me/?text=${encodedText}`;
+            window.open(waUrl, '_blank');
+        }
+        else if (platform === 'instagram') {
+            // إنستغرام - نسخ النص وفتح التطبيق
+            navigator.clipboard.writeText(shareText).then(() => {
+                // فتح إنستغرام
+                window.open('https://www.instagram.com/', '_blank');
+                showNotification('✅ تم نسخ النص! افتح إنستغرام والصقه في المحادثة');
+            }).catch(() => {
+                // طريقة بديلة
+                const textarea = document.createElement('textarea');
+                textarea.value = shareText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                window.open('https://www.instagram.com/', '_blank');
+                showNotification('✅ تم نسخ النص! افتح إنستغرام والصقه في المحادثة');
+            });
+        }
+    }
+
+    function loadBookDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = parseInt(urlParams.get('id'));
+        const book = books.find(b => b.id === bookId);
+        
+        if (!book) {
+            document.getElementById('detailsCard').innerHTML = `
+                <div style="text-align:center;padding:3rem;">
+                    <i class="fas fa-book-open" style="font-size:3rem;opacity:0.5;"></i>
+                    <p style="margin-top:1rem;">الكتاب غير موجود</p>
+                    <a href="./" class="back-home">العودة للمتجر</a>
                 </div>
             `;
-            cartSummary.innerHTML = '';
             return;
         }
         
-        let total = 0;
-        cartItemsDiv.innerHTML = cart.map(item => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
-            return `
-                <div class="cart-item">
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${escapeHtml(item.title)}</div>
-                        <div class="cart-item-price">${item.price} دج</div>
-                    </div>
-                    <div class="cart-item-quantity">
-                        <button class="qty-btn qty-decrease" data-id="${item.id}" style="background: #e74c3c; color: white;">-</button>
-                        <span class="qty-value">${item.quantity}</span>
-                        <button class="qty-btn qty-increase" data-id="${item.id}" style="background: #27ae60; color: white;">+</button>
-                    </div>
-                    <div class="cart-item-total">${itemTotal} دج</div>
-                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
-                </div>
-            `;
-        }).join('');
+        document.getElementById('detailsCover').innerHTML = `
+            <img src="${book.coverImage}" alt="${book.title}" class="details-cover-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <i class="fas fa-book-open" style="display:none; font-size:4rem;"></i>
+            <span class="details-status ${book.available ? 'status-available' : 'status-out'}">
+                ${book.available ? 'متوفر' : 'نفدت الكمية'}
+            </span>
+        `;
         
-        cartSummary.innerHTML = `
-            <div class="cart-summary">
-                <div class="total-row">
-                    <span class="total-label">المجموع الكلي:</span>
-                    <span class="total-amount">${total} دج</span>
-                </div>
-                <div class="item-count">عدد العناصر: ${getCartItemCount()} كتاب</div>
+        document.getElementById('detailsInfo').innerHTML = `
+            <h1 class="details-title">📖 ${book.title}</h1>
+            <p class="details-author">✍️ ${book.author}</p>
+            <div class="details-price">${book.price} دج</div>
+            <div class="details-summary">
+                <strong>📝 نبذة عن الكتاب:</strong><br><br>
+                ${book.summary}
             </div>
+            
+            <div class="share-section">
+                <div class="share-title">
+                    <i class="fas fa-share-alt"></i> مشاركة الكتاب
+                </div>
+                <div class="share-buttons">
+                    <button class="share-btn share-whatsapp" onclick="shareBook('whatsapp', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fab fa-whatsapp"></i> واتساب
+                    </button>
+                    <button class="share-btn share-instagram" onclick="shareBook('instagram', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fab fa-instagram"></i> إنستغرام
+                    </button>
+                    <button class="share-btn share-copy" onclick="shareBook('copy', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
+                        <i class="fas fa-copy"></i> نسخ الرابط
+                    </button>
+                </div>
+            </div>
+            
+            <button class="add-to-cart-details" id="detailsAddToCart" ${!book.available ? 'disabled' : ''}>
+                ${book.available ? '🛒 إضافة إلى السلة' : '❌ الكتاب غير متوفر حالياً'}
+            </button>
         `;
         
-        document.querySelectorAll('.qty-decrease').forEach(btn => {
-            btn.onclick = function() {
-                const id = parseInt(this.dataset.id);
-                const cart = getCart();
-                const item = cart.find(i => i.id === id);
-                if (item && item.quantity > 1) {
-                    updateQuantity(id, item.quantity - 1);
-                } else if (item) {
-                    removeFromCart(id);
-                }
-            };
-        });
-        
-        document.querySelectorAll('.qty-increase').forEach(btn => {
-            btn.onclick = function() {
-                const id = parseInt(this.dataset.id);
-                const cart = getCart();
-                const item = cart.find(i => i.id === id);
-                if (item) {
-                    updateQuantity(id, item.quantity + 1);
-                }
-            };
-        });
-        
-        document.querySelectorAll('.remove-item').forEach(btn => {
-            btn.onclick = function() {
-                removeFromCart(parseInt(this.dataset.id));
-            };
-        });
-    }
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // ============================================
-    // طباعة الفاتورة - حل بسيط وموثوق 100%
-    // ============================================
-    function printInvoice() {
-        const cart = getCart();
-        if (cart.length === 0) {
-            showNotification('لا يمكن طباعة فاتورة والسلة فارغة');
-            return;
+        const addBtn = document.getElementById('detailsAddToCart');
+        if (addBtn) {
+            addBtn.addEventListener('click', () => addToCart(book.id));
         }
-        
-        const now = new Date();
-        const invoiceNumber = 'INV-' + now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + '-' + Math.floor(Math.random() * 10000);
-        const date = now.toLocaleDateString('ar-EG');
-        const time = now.toLocaleTimeString('ar-EG');
-        const total = getCartTotal();
-        
-        let itemsHtml = '';
-        cart.forEach(item => {
-            itemsHtml += `
-                <tr>
-                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${escapeHtml(item.title)}</td>
-                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.price} دج</td>
-                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.quantity}</td>
-                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.price * item.quantity} دج</td>
-                </tr>
-            `;
-        });
-        
-        const printContent = `
-            <!DOCTYPE html>
-            <html dir="rtl">
-            <head>
-                <meta charset="UTF-8">
-                <title>فاتورة - متجر ماري للكتب</title>
-                <style>
-                    @page {
-                        size: auto;
-                        margin: 15mm;
-                    }
-                    body {
-                        font-family: 'Tajawal', sans-serif;
-                        padding: 20px;
-                        direction: rtl;
-                        background: white;
-                        color: #2c1810;
-                    }
-                    .invoice-header {
-                        text-align: center;
-                        margin-bottom: 30px;
-                        padding-bottom: 20px;
-                        border-bottom: 2px dashed #c97e5a;
-                    }
-                    .invoice-logo {
-                        width: 80px;
-                        height: 80px;
-                        border-radius: 15px;
-                        margin-bottom: 10px;
-                    }
-                    .invoice-title {
-                        font-size: 24px;
-                        font-weight: bold;
-                    }
-                    .invoice-store {
-                        color: #8b6b5a;
-                        font-size: 14px;
-                    }
-                    .invoice-details {
-                        margin-bottom: 20px;
-                        padding: 15px;
-                        background: #fef9f0;
-                        border-radius: 12px;
-                    }
-                    .invoice-details p {
-                        margin: 5px 0;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin: 20px 0;
-                    }
-                    th {
-                        background: #c97e5a;
-                        color: white;
-                        padding: 10px;
-                        text-align: center;
-                    }
-                    td {
-                        padding: 8px;
-                        border-bottom: 1px solid #f0e4d8;
-                        text-align: center;
-                    }
-                    .invoice-total {
-                        margin-top: 20px;
-                        padding-top: 15px;
-                        border-top: 2px solid #c97e5a;
-                        text-align: left;
-                        font-size: 18px;
-                        font-weight: bold;
-                    }
-                    .invoice-footer {
-                        text-align: center;
-                        margin-top: 30px;
-                        padding-top: 20px;
-                        border-top: 1px dashed #f0e4d8;
-                        font-size: 12px;
-                        color: #8b6b5a;
-                    }
-                    @media print {
-                        body {
-                            padding: 0;
-                            margin: 0;
-                        }
-                        .invoice-header {
-                            margin-bottom: 20px;
-                        }
-                        .invoice-details {
-                            padding: 10px;
-                        }
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="invoice-header">
-                    <img src="img.png" alt="شعار المتجر" class="invoice-logo" onerror="this.style.display='none';">
-                    <div class="invoice-title">📚 متجر ماري للكتب</div>
-                    <div class="invoice-store">Mary's Bookstore</div>
-                    <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">فاتورة شراء</div>
-                </div>
-                
-                <div class="invoice-details">
-                    <p><strong>رقم الفاتورة:</strong> ${invoiceNumber}</p>
-                    <p><strong>التاريخ:</strong> ${date}</p>
-                    <p><strong>الوقت:</strong> ${time}</p>
-                </div>
-                
-                <table>
-                    <thead>
-                        <tr><th>اسم الكتاب</th>
-                            <th>السعر</th>
-                            <th>الكمية</th>
-                            <th>الإجمالي</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${itemsHtml}
-                    </tbody>
-                </table>
-                
-                <div class="invoice-total">
-                    المجموع الكلي: ${total} دج
-                </div>
-                
-                <div class="invoice-footer">
-                    <i class="fab fa-instagram"></i> marie__books_<br>
-                    شكراً لتسوقكم مع متجر ماري للكتب 📚
-                </div>
-            </body>
-            </html>
-        `;
-        
-        // فتح نافذة جديدة للطباعة
-        const printWindow = window.open('', '_blank', 'width=800,height=600');
-        printWindow.document.write(printContent);
-        printWindow.document.close();
-        
-        // انتظار تحميل المحتوى ثم الطباعة
-        printWindow.onload = function() {
-            printWindow.print();
-            // لا نغلق النافذة تلقائياً حتى يتمكن المستخدم من حفظ PDF
-            // printWindow.close();
-        };
-    }
-
-    function checkout() {
-        const cart = getCart();
-        if (cart.length === 0) {
-            showNotification('السلة فارغة! أضف بعض الكتب أولاً.');
-            return;
-        }
-        const total = getCartTotal();
-        const itemCount = getCartItemCount();
-        showNotification(`شكراً لتسوقك! تم شراء ${itemCount} كتب بمبلغ ${total} دج. سيتم التواصل معك قريباً 💙`);
-        saveCart([]);
-        displayCart();
     }
 
     function initTheme() {
@@ -927,36 +643,17 @@
         }
     }
 
-    function init() {
+    document.addEventListener('DOMContentLoaded', function() {
         initTheme();
-        displayCart();
+        loadBookDetails();
         updateCartCount();
         
-        const themeBtn = document.getElementById('themeToggle');
-        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
         
-        const checkoutBtn = document.getElementById('checkoutCartBtn');
-        if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
-        
-        const clearBtn = document.getElementById('clearCartBtn');
-        if (clearBtn) clearBtn.addEventListener('click', clearCart);
-        
-        const printBtn = document.getElementById('printInvoiceBtn');
-        if (printBtn) printBtn.addEventListener('click', printInvoice);
-        
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'bookCart') {
-                displayCart();
-                updateCartCount();
-            }
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'bookCart') updateCartCount();
         });
-    }
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    });
 </script>
 </body>
 </html>
