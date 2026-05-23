@@ -163,6 +163,7 @@
             gap: 10px;
         }
 
+        /* عرض الكتاب في سطر واحد */
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -170,7 +171,7 @@
             padding: 1rem;
             border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .cart-item:last-child {
@@ -179,35 +180,40 @@
 
         .cart-item-info {
             flex: 2;
+            min-width: 120px;
         }
 
         .cart-item-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
 
         .cart-item-price {
             color: var(--color-primary);
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .cart-item-quantity {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
         }
 
         .qty-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 8px;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .qty-btn:hover {
@@ -215,28 +221,29 @@
         }
 
         .qty-value {
-            min-width: 40px;
+            min-width: 35px;
             text-align: center;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
         }
 
         .cart-item-total {
             font-weight: bold;
-            min-width: 90px;
+            min-width: 70px;
             text-align: left;
             color: var(--color-primary);
+            font-size: 0.9rem;
         }
 
         .remove-item {
             background: var(--remove-bg);
             color: white;
             border: none;
-            padding: 6px 14px;
+            padding: 5px 10px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         .remove-item:hover {
@@ -456,36 +463,92 @@
         }
 
         /* ============================================ */
-        /* تصميم الهاتف - أزرار بجانب بعضها */
+        /* تصميم الهاتف - توحيد القائمة العلوية */
         /* ============================================ */
         @media (max-width: 768px) {
             .cart-card {
                 padding: 1rem;
             }
+            
+            /* عرض الكتاب في سطر واحد */
             .cart-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            .cart-item-total {
-                text-align: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
             
-            /* الأزرار بجانب بعضها بشكل منظم */
+            .cart-item-info {
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            .cart-item-title {
+                font-size: 0.8rem;
+                max-width: 120px;
+            }
+            
+            .cart-item-price {
+                font-size: 0.75rem;
+            }
+            
+            .cart-item-quantity {
+                gap: 0.2rem;
+            }
+            
+            .qty-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 0.9rem;
+            }
+            
+            .qty-value {
+                min-width: 28px;
+                font-size: 0.8rem;
+            }
+            
+            .cart-item-total {
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            
+            .remove-item {
+                padding: 4px 8px;
+                font-size: 0.65rem;
+            }
+            
+            /* توحيد القائمة العلوية */
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+            
+            .theme-toggle, .instagram-link, .home-link {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+            
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo h1 {
+                font-size: 0.85rem;
+            }
+            
             .buttons-row {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
+                gap: 0.5rem;
             }
             
             .btn {
                 width: 100%;
                 padding: 10px 8px;
                 font-size: 0.75rem;
-            }
-            
-            .header-actions .instagram-link span,
-            .header-actions .home-link span {
-                display: none;
             }
             
             .cart-card h1 {
@@ -497,9 +560,51 @@
         }
 
         @media (max-width: 480px) {
-            .buttons-row {
-                gap: 0.5rem;
+            .cart-item-title {
+                font-size: 0.7rem;
+                max-width: 90px;
             }
+            
+            .cart-item-price {
+                font-size: 0.7rem;
+            }
+            
+            .qty-btn {
+                width: 22px;
+                height: 22px;
+                font-size: 0.8rem;
+            }
+            
+            .qty-value {
+                min-width: 24px;
+                font-size: 0.75rem;
+            }
+            
+            .cart-item-total {
+                font-size: 0.75rem;
+                min-width: 50px;
+            }
+            
+            .remove-item {
+                padding: 3px 6px;
+                font-size: 0.6rem;
+            }
+            
+            .theme-toggle, .instagram-link, .home-link {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.65rem;
+            }
+            
+            .theme-toggle span,
+            .instagram-link span,
+            .home-link span {
+                display: none;
+            }
+            
+            .buttons-row {
+                gap: 0.4rem;
+            }
+            
             .btn {
                 padding: 8px 6px;
                 font-size: 0.7rem;
@@ -689,13 +794,12 @@
                         <div class="cart-item-price">${item.price} دج</div>
                     </div>
                     <div class="cart-item-quantity">
-                        <span>الكمية:</span>
                         <button class="qty-btn qty-decrease" data-id="${item.id}" style="background: #e74c3c; color: white;">-</button>
                         <span class="qty-value">${item.quantity}</span>
                         <button class="qty-btn qty-increase" data-id="${item.id}" style="background: #27ae60; color: white;">+</button>
                     </div>
                     <div class="cart-item-total">${itemTotal} دج</div>
-                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i> إزالة</button>
+                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
                 </div>
             `;
         }).join('');

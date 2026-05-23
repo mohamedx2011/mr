@@ -498,27 +498,41 @@
         }, 2500);
     }
 
+    // ============================================
+    // دوال المشاركة - تعمل بشكل صحيح
+    // ============================================
     function shareBook(platform, book) {
-        const bookUrl = `${window.location.origin}/book-details.html?id=${book.id}`;
-        const text = encodeURIComponent(`📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!`);
+        // بناء الرابط الكامل للكتاب
+        const fullUrl = window.location.origin + window.location.pathname + '?id=' + book.id;
+        
+        // نص المشاركة
+        const shareText = `📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!`;
+        const encodedText = encodeURIComponent(shareText);
+        const encodedUrl = encodeURIComponent(fullUrl);
         
         if (platform === 'copy') {
-            navigator.clipboard.writeText(`${book.title} - ${book.author} - ${book.price} دج\n${bookUrl}`);
-            showNotification('✅ تم نسخ رابط الكتاب إلى الحافظة');
-        } else if (platform === 'instagram') {
-            // فتح صفحة إنستغرام لإنشاء منشور (سيتم نسخ النص تلقائياً)
-            const igText = `اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!\n\nالرابط: ${bookUrl}`;
-            navigator.clipboard.writeText(igText);
+            // نسخ النص والرابط معاً
+            const fullMessage = `${shareText}\n\nالرابط: ${fullUrl}`;
+            navigator.clipboard.writeText(fullMessage);
+            showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+        } 
+        else if (platform === 'whatsapp') {
+            // واتساب - يفتح التطبيق مباشرة مع النص والرابط
+            const waUrl = `https://wa.me/?text=${encodedText}%0A%0A${encodedUrl}`;
+            window.open(waUrl, '_blank');
+        } 
+        else if (platform === 'facebook') {
+            // فيسبوك - مشاركة الرابط مع نص
+            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
+            window.open(fbUrl, '_blank', 'width=600,height=500');
+        }
+        else if (platform === 'instagram') {
+            // إنستغرام - نسخ النص والرابط وفتح الموقع
+            const fullMessage = `${shareText}\n\nالرابط: ${fullUrl}`;
+            navigator.clipboard.writeText(fullMessage);
+            // فتح إنستغرام في علامة تبويب جديدة
             window.open('https://www.instagram.com/', '_blank');
-            showNotification('✅ تم نسخ نص المشاركة، يمكنك لصقه في منشور إنستغرام');
-        } else {
-            const shareUrls = {
-                whatsapp: `https://wa.me/?text=${text} ${encodeURIComponent(bookUrl)}`,
-                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(bookUrl)}&quote=${text}`
-            };
-            if (shareUrls[platform]) {
-                window.open(shareUrls[platform], '_blank', 'width=600,height=500');
-            }
+            showNotification('✅ تم نسخ النص والرابط! الصقه في رسالة إنستغرام');
         }
     }
 
