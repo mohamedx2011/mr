@@ -35,7 +35,6 @@
             --instagram: #E4405F;
             --instagram-hover: #c1354d;
             --whatsapp: #25D366;
-            --facebook: #1877F2;
             --copy: #607D8B;
         }
 
@@ -59,7 +58,6 @@
             --instagram: #E4405F;
             --instagram-hover: #c1354d;
             --whatsapp: #25D366;
-            --facebook: #1877F2;
             --copy: #607D8B;
         }
 
@@ -274,10 +272,6 @@
             background: var(--whatsapp);
         }
 
-        .share-facebook {
-            background: var(--facebook);
-        }
-
         .share-instagram {
             background: var(--instagram);
         }
@@ -480,7 +474,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--available-bg);
+            background: #27ae60;
             color: white;
             padding: 12px 20px;
             border-radius: 12px;
@@ -499,40 +493,53 @@
     }
 
     // ============================================
-    // دوال المشاركة - تعمل بشكل صحيح
+    // دوال المشاركة - إرسال للأصدقاء مباشرة
     // ============================================
     function shareBook(platform, book) {
         // بناء الرابط الكامل للكتاب
         const fullUrl = window.location.origin + window.location.pathname + '?id=' + book.id;
         
-        // نص المشاركة
-        const shareText = `📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!`;
+        // نص المشاركة الكامل مع اسم المتجر
+        const shareText = `📚 اكتشفت هذا الكتاب الرائع "${book.title}" للكاتب ${book.author} بسعر ${book.price} دج في متجر ماري للكتب!\n\nالرابط: ${fullUrl}`;
         const encodedText = encodeURIComponent(shareText);
-        const encodedUrl = encodeURIComponent(fullUrl);
         
         if (platform === 'copy') {
-            // نسخ النص والرابط معاً
-            const fullMessage = `${shareText}\n\nالرابط: ${fullUrl}`;
-            navigator.clipboard.writeText(fullMessage);
-            showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+            // نسخ النص الكامل مع الرابط
+            navigator.clipboard.writeText(shareText).then(() => {
+                showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+            }).catch(() => {
+                // طريقة بديلة للنسخ إذا فشلت
+                const textarea = document.createElement('textarea');
+                textarea.value = shareText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showNotification('✅ تم نسخ نص المشاركة مع الرابط إلى الحافظة');
+            });
         } 
         else if (platform === 'whatsapp') {
             // واتساب - يفتح التطبيق مباشرة مع النص والرابط
-            const waUrl = `https://wa.me/?text=${encodedText}%0A%0A${encodedUrl}`;
+            const waUrl = `https://wa.me/?text=${encodedText}`;
             window.open(waUrl, '_blank');
-        } 
-        else if (platform === 'facebook') {
-            // فيسبوك - مشاركة الرابط مع نص
-            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
-            window.open(fbUrl, '_blank', 'width=600,height=500');
         }
         else if (platform === 'instagram') {
-            // إنستغرام - نسخ النص والرابط وفتح الموقع
-            const fullMessage = `${shareText}\n\nالرابط: ${fullUrl}`;
-            navigator.clipboard.writeText(fullMessage);
-            // فتح إنستغرام في علامة تبويب جديدة
-            window.open('https://www.instagram.com/', '_blank');
-            showNotification('✅ تم نسخ النص والرابط! الصقه في رسالة إنستغرام');
+            // إنستغرام - نسخ النص وفتح التطبيق
+            navigator.clipboard.writeText(shareText).then(() => {
+                // فتح إنستغرام
+                window.open('https://www.instagram.com/', '_blank');
+                showNotification('✅ تم نسخ النص! افتح إنستغرام والصقه في المحادثة');
+            }).catch(() => {
+                // طريقة بديلة
+                const textarea = document.createElement('textarea');
+                textarea.value = shareText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                window.open('https://www.instagram.com/', '_blank');
+                showNotification('✅ تم نسخ النص! افتح إنستغرام والصقه في المحادثة');
+            });
         }
     }
 
@@ -576,9 +583,6 @@
                 <div class="share-buttons">
                     <button class="share-btn share-whatsapp" onclick="shareBook('whatsapp', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
                         <i class="fab fa-whatsapp"></i> واتساب
-                    </button>
-                    <button class="share-btn share-facebook" onclick="shareBook('facebook', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
-                        <i class="fab fa-facebook-f"></i> فيسبوك
                     </button>
                     <button class="share-btn share-instagram" onclick="shareBook('instagram', ${JSON.stringify(book).replace(/"/g, '&quot;')})">
                         <i class="fab fa-instagram"></i> إنستغرام
