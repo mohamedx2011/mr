@@ -348,127 +348,6 @@
             color: white;
         }
 
-        /* Invoice Modal - لعرض الفاتورة قبل التنزيل */
-        .invoice-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .invoice-modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-            position: relative;
-            direction: rtl;
-        }
-
-        .invoice-modal-content.dark {
-            background: #2c2c3e;
-            color: #f0f0f5;
-        }
-
-        .close-invoice-modal {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #8b6b5a;
-        }
-
-        .invoice-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px dashed #c97e5a;
-        }
-
-        .invoice-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            margin-bottom: 0.5rem;
-        }
-
-        .invoice-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .invoice-store {
-            color: #8b6b5a;
-            font-size: 0.8rem;
-        }
-
-        .invoice-details {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            background: #fef9f0;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-
-        .invoice-details.dark {
-            background: #232338;
-        }
-
-        .invoice-items {
-            margin: 1rem 0;
-        }
-
-        .invoice-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0e4d8;
-            font-size: 0.8rem;
-        }
-
-        .invoice-total {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid #c97e5a;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .invoice-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #f0e4d8;
-            font-size: 0.7rem;
-            color: #8b6b5a;
-        }
-
-        .download-pdf-btn {
-            width: 100%;
-            padding: 12px;
-            background: #c97e5a;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 1rem;
-            font-size: 1rem;
-        }
-
         @media (max-width: 768px) {
             .cart-card {
                 padding: 1rem;
@@ -631,18 +510,9 @@
         <div class="buttons-row">
             <a href="./" class="btn btn-primary">↩️ متابعة التسوق</a>
             <button id="checkoutCartBtn" class="btn btn-success">✅ إتمام الشراء</button>
-            <button id="showInvoiceBtn" class="btn btn-secondary">📄 عرض الفاتورة</button>
+            <button id="printInvoiceBtn" class="btn btn-secondary">🖨️ طباعة الفاتورة</button>
             <button id="clearCartBtn" class="btn btn-danger">🗑️ تفريغ</button>
         </div>
-    </div>
-</div>
-
-<!-- Invoice Modal -->
-<div id="invoiceModal" class="invoice-modal">
-    <div class="invoice-modal-content" id="invoiceModalContent">
-        <span class="close-invoice-modal" id="closeInvoiceModal">&times;</span>
-        <div id="invoiceContent"></div>
-        <button id="downloadAsImageBtn" class="download-pdf-btn">📸 تنزيل الفاتورة كصورة</button>
     </div>
 </div>
 
@@ -833,13 +703,13 @@
     }
 
     // ============================================
-    // إنشاء وعرض الفاتورة
+    // طباعة الفاتورة - حل بسيط وموثوق 100%
     // ============================================
-    function generateInvoiceHTML() {
+    function printInvoice() {
         const cart = getCart();
         if (cart.length === 0) {
-            showNotification('لا يمكن عمل فاتورة والسلة فارغة');
-            return null;
+            showNotification('لا يمكن طباعة فاتورة والسلة فارغة');
+            return;
         }
         
         const now = new Date();
@@ -847,127 +717,162 @@
         const date = now.toLocaleDateString('ar-EG');
         const time = now.toLocaleTimeString('ar-EG');
         const total = getCartTotal();
-        const isDark = document.body.classList.contains('dark');
         
         let itemsHtml = '';
         cart.forEach(item => {
             itemsHtml += `
-                <div class="invoice-item">
-                    <span>${escapeHtml(item.title)} (×${item.quantity})</span>
-                    <span>${item.price * item.quantity} دج</span>
-                </div>
+                <tr>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${escapeHtml(item.title)}</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.price} دج</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.quantity}</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.price * item.quantity} دج</td>
+                </tr>
             `;
         });
         
-        return `
-            <div class="invoice-header">
-                <img src="./img.png" alt="شعار المتجر" class="invoice-logo" onerror="this.style.display='none';">
-                <div class="invoice-title">📚 متجر ماري للكتب</div>
-                <div class="invoice-store">Mary's Bookstore</div>
-                <div style="margin-top: 5px;">فاتورة شراء</div>
-            </div>
-            <div class="invoice-details ${isDark ? 'dark' : ''}">
-                <div><strong>رقم الفاتورة:</strong> ${invoiceNumber}</div>
-                <div><strong>التاريخ:</strong> ${date}</div>
-                <div><strong>الوقت:</strong> ${time}</div>
-            </div>
-            <div class="invoice-items">
-                ${itemsHtml}
-            </div>
-            <div class="invoice-total">
-                <span>المجموع الكلي:</span>
-                <span>${total} دج</span>
-            </div>
-            <div class="invoice-footer">
-                <i class="fab fa-instagram"></i> marie__books_<br>
-                شكراً لتسوقكم مع متجر ماري للكتب 📚
-            </div>
-        `;
-    }
-
-    function showInvoice() {
-        const cart = getCart();
-        if (cart.length === 0) {
-            showNotification('لا يمكن عمل فاتورة والسلة فارغة');
-            return;
-        }
-        
-        const invoiceHTML = generateInvoiceHTML();
-        if (!invoiceHTML) return;
-        
-        document.getElementById('invoiceContent').innerHTML = invoiceHTML;
-        document.getElementById('invoiceModal').style.display = 'flex';
-        
-        // تطبيق الثيم على النافذة المنبثقة
-        const modalContent = document.getElementById('invoiceModalContent');
-        if (document.body.classList.contains('dark')) {
-            modalContent.classList.add('dark');
-        } else {
-            modalContent.classList.remove('dark');
-        }
-    }
-
-    async function downloadAsImage() {
-        const invoiceElement = document.getElementById('invoiceContent');
-        if (!invoiceElement || invoiceElement.innerHTML === '') {
-            showNotification('لا توجد فاتورة للتحميل');
-            return;
-        }
-        
-        showNotification('⏳ جاري تجهيز الفاتورة...');
-        
-        try {
-            // استخدام html2canvas لتحويل الفاتورة إلى صورة
-            const html2canvasLib = await import('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
-            const canvas = await html2canvasLib.default(invoiceElement, {
-                scale: 2,
-                backgroundColor: document.body.classList.contains('dark') ? '#2c2c3e' : '#ffffff',
-                logging: false
-            });
-            
-            // تحويل إلى رابط وتحميل
-            const link = document.createElement('a');
-            const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-            link.download = `فاتورة_متجر_ماري_${timestamp}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            
-            showNotification('✅ تم تنزيل الفاتورة كصورة بنجاح');
-        } catch (error) {
-            console.error('خطأ:', error);
-            // طريقة بديلة - استخدام canvas مباشرة
-            try {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const invoiceClone = invoiceElement.cloneNode(true);
-                invoiceClone.style.position = 'absolute';
-                invoiceClone.style.top = '-9999px';
-                invoiceClone.style.left = '-9999px';
-                invoiceClone.style.width = '400px';
-                document.body.appendChild(invoiceClone);
+        const printContent = `
+            <!DOCTYPE html>
+            <html dir="rtl">
+            <head>
+                <meta charset="UTF-8">
+                <title>فاتورة - متجر ماري للكتب</title>
+                <style>
+                    @page {
+                        size: auto;
+                        margin: 15mm;
+                    }
+                    body {
+                        font-family: 'Tajawal', sans-serif;
+                        padding: 20px;
+                        direction: rtl;
+                        background: white;
+                        color: #2c1810;
+                    }
+                    .invoice-header {
+                        text-align: center;
+                        margin-bottom: 30px;
+                        padding-bottom: 20px;
+                        border-bottom: 2px dashed #c97e5a;
+                    }
+                    .invoice-logo {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 15px;
+                        margin-bottom: 10px;
+                    }
+                    .invoice-title {
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                    .invoice-store {
+                        color: #8b6b5a;
+                        font-size: 14px;
+                    }
+                    .invoice-details {
+                        margin-bottom: 20px;
+                        padding: 15px;
+                        background: #fef9f0;
+                        border-radius: 12px;
+                    }
+                    .invoice-details p {
+                        margin: 5px 0;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                    }
+                    th {
+                        background: #c97e5a;
+                        color: white;
+                        padding: 10px;
+                        text-align: center;
+                    }
+                    td {
+                        padding: 8px;
+                        border-bottom: 1px solid #f0e4d8;
+                        text-align: center;
+                    }
+                    .invoice-total {
+                        margin-top: 20px;
+                        padding-top: 15px;
+                        border-top: 2px solid #c97e5a;
+                        text-align: left;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .invoice-footer {
+                        text-align: center;
+                        margin-top: 30px;
+                        padding-top: 20px;
+                        border-top: 1px dashed #f0e4d8;
+                        font-size: 12px;
+                        color: #8b6b5a;
+                    }
+                    @media print {
+                        body {
+                            padding: 0;
+                            margin: 0;
+                        }
+                        .invoice-header {
+                            margin-bottom: 20px;
+                        }
+                        .invoice-details {
+                            padding: 10px;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="invoice-header">
+                    <img src="img.png" alt="شعار المتجر" class="invoice-logo" onerror="this.style.display='none';">
+                    <div class="invoice-title">📚 متجر ماري للكتب</div>
+                    <div class="invoice-store">Mary's Bookstore</div>
+                    <div style="margin-top: 10px; font-size: 16px; font-weight: bold;">فاتورة شراء</div>
+                </div>
                 
-                // استخدام html2canvas من CDN
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-                script.onload = () => {
-                    html2canvas(invoiceClone, { scale: 2 }).then(canvas => {
-                        const link = document.createElement('a');
-                        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-                        link.download = `فاتورة_متجر_ماري_${timestamp}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                        document.body.removeChild(invoiceClone);
-                        showNotification('✅ تم تنزيل الفاتورة كصورة');
-                    }).catch(err => {
-                        document.body.removeChild(invoiceClone);
-                        showNotification('❌ حدث خطأ، حاول مرة أخرى');
-                    });
-                };
-                document.head.appendChild(script);
-            } catch(e) {
-                showNotification('❌ حدث خطأ في تحميل الفاتورة');
-            }
-        }
+                <div class="invoice-details">
+                    <p><strong>رقم الفاتورة:</strong> ${invoiceNumber}</p>
+                    <p><strong>التاريخ:</strong> ${date}</p>
+                    <p><strong>الوقت:</strong> ${time}</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr><th>اسم الكتاب</th>
+                            <th>السعر</th>
+                            <th>الكمية</th>
+                            <th>الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${itemsHtml}
+                    </tbody>
+                </table>
+                
+                <div class="invoice-total">
+                    المجموع الكلي: ${total} دج
+                </div>
+                
+                <div class="invoice-footer">
+                    <i class="fab fa-instagram"></i> marie__books_<br>
+                    شكراً لتسوقكم مع متجر ماري للكتب 📚
+                </div>
+            </body>
+            </html>
+        `;
+        
+        // فتح نافذة جديدة للطباعة
+        const printWindow = window.open('', '_blank', 'width=800,height=600');
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        
+        // انتظار تحميل المحتوى ثم الطباعة
+        printWindow.onload = function() {
+            printWindow.print();
+            // لا نغلق النافذة تلقائياً حتى يتمكن المستخدم من حفظ PDF
+            // printWindow.close();
+        };
     }
 
     function checkout() {
@@ -1036,23 +941,8 @@
         const clearBtn = document.getElementById('clearCartBtn');
         if (clearBtn) clearBtn.addEventListener('click', clearCart);
         
-        const showInvoiceBtn = document.getElementById('showInvoiceBtn');
-        if (showInvoiceBtn) showInvoiceBtn.addEventListener('click', showInvoice);
-        
-        const closeModal = document.getElementById('closeInvoiceModal');
-        if (closeModal) closeModal.addEventListener('click', function() {
-            document.getElementById('invoiceModal').style.display = 'none';
-        });
-        
-        const downloadBtn = document.getElementById('downloadAsImageBtn');
-        if (downloadBtn) downloadBtn.addEventListener('click', downloadAsImage);
-        
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('invoiceModal');
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
+        const printBtn = document.getElementById('printInvoiceBtn');
+        if (printBtn) printBtn.addEventListener('click', printInvoice);
         
         window.addEventListener('storage', function(e) {
             if (e.key === 'bookCart') {

@@ -43,6 +43,10 @@
             --instagram-hover: #c1354d;
             --search-bg: #ffffff;
             --search-border: #f0e4d8;
+            /* ألوان شريط التمرير النهاري */
+            --scrollbar-track: #f0e4d8;
+            --scrollbar-thumb: #c97e5a;
+            --scrollbar-thumb-hover: #b85c3a;
         }
 
         body.dark {
@@ -72,6 +76,10 @@
             --instagram-hover: #c1354d;
             --search-bg: #232338;
             --search-border: #33334a;
+            /* ألوان شريط التمرير الليلي */
+            --scrollbar-track: #2a2a3e;
+            --scrollbar-thumb: #e8955a;
+            --scrollbar-thumb-hover: #d47a45;
         }
 
         body {
@@ -81,6 +89,40 @@
             min-height: 100vh;
         }
 
+        /* ============================================ */
+        /* تخصيص شريط التمرير (Scrollbar) */
+        /* ============================================ */
+        
+        /* لمتصفحات Webkit (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        /* لمتصفح Firefox */
+        * {
+            scrollbar-width: thin;
+        }
+
+        /* ============================================ */
+        /* باقي الأنماط */
+        /* ============================================ */
+        
         .header {
             background: var(--bg-header);
             padding: 0.7rem 1rem;
@@ -179,7 +221,6 @@
             color: white;
         }
 
-        /* شريط البحث - بدون اقتراحات */
         .search-container {
             max-width: 1400px;
             margin: 1rem auto 0 auto;
@@ -222,7 +263,6 @@
             color: var(--text-muted);
         }
 
-        /* إزالة اقتراحات البحث */
         .search-input::-webkit-search-decoration,
         .search-input::-webkit-search-cancel-button,
         .search-input::-webkit-search-results-button,
@@ -576,9 +616,6 @@
             opacity: 0.5;
         }
 
-        /* ============================================ */
-        /* تصميم الهاتف - عرض كتابين وتحسين السلة */
-        /* ============================================ */
         @media (max-width: 768px) {
             .fab-menu {
                 display: flex;
@@ -594,42 +631,33 @@
                 padding: 0 0.8rem;
                 padding-bottom: 80px;
             }
-            
             .books-grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.8rem;
             }
-            
             .book-cover {
                 height: 160px;
             }
-            
             .book-title {
                 font-size: 0.85rem;
             }
-            
             .book-author {
                 font-size: 0.7rem;
             }
-            
             .book-price {
                 font-size: 0.9rem;
             }
-            
             .book-summary {
                 display: none;
             }
-            
             .add-to-cart-btn {
                 padding: 6px 8px;
                 font-size: 0.7rem;
             }
-            
             .book-info {
                 padding: 0.6rem;
             }
-            
             .books-section h2 {
                 font-size: 1.2rem;
             }
@@ -637,12 +665,9 @@
                 margin: 0.8rem auto 0 auto;
                 padding: 0 0.8rem;
             }
-            
-            /* تحسين شكل الهيدر في الهاتف */
             .header-actions {
                 gap: 0.3rem;
             }
-            
             .theme-toggle, .instagram-link, .cart-link {
                 padding: 0.3rem 0.6rem;
             }
@@ -653,63 +678,49 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.6rem;
             }
-            
             .book-cover {
                 height: 140px;
             }
-            
             .book-title {
                 font-size: 0.75rem;
             }
-            
             .book-author {
                 font-size: 0.6rem;
             }
-            
             .book-price {
                 font-size: 0.8rem;
             }
-            
             .add-to-cart-btn {
                 padding: 5px 6px;
                 font-size: 0.65rem;
             }
-            
             .book-info {
                 padding: 0.5rem;
             }
-            
             .theme-toggle span, 
             .instagram-link span, 
             .cart-link span {
                 display: none;
             }
-            
             .fab-menu {
                 width: 50px;
                 height: 50px;
                 bottom: 20px;
                 left: 20px;
             }
-            
             .logo-text p {
                 display: none;
             }
-            
             .logo-img {
                 width: 32px;
                 height: 32px;
             }
-            
             .logo-text h1 {
                 font-size: 0.85rem;
             }
-            
-            /* أزرار الهيدر بجانب بعضها بشكل جميل */
             .header-actions {
                 gap: 0.2rem;
             }
-            
             .theme-toggle, .instagram-link, .cart-link {
                 padding: 0.3rem 0.5rem;
                 border-radius: 30px;
@@ -739,24 +750,6 @@
         @keyframes slideOut {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100px); opacity: 0; }
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--border-color);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-primary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-primary-dark);
         }
 
         body.sidebar-open {
@@ -865,9 +858,6 @@
         { id: 12, title: "أيام الله", author: "أحمد خيري", category: "religious", price: 1800, available: true, summary: "رحلة روحانية في فهم أسماء الله الحسنى.", coverImage: "./img.png" }
     ];
 
-    // ============================================
-    // دوال السلة
-    // ============================================
     function getCart() {
         try {
             const cartJson = localStorage.getItem('bookCart');
@@ -956,9 +946,6 @@
         }, 2500);
     }
 
-    // ============================================
-    // البحث والتصفية
-    // ============================================
     let currentCategory = 'all';
     let searchQuery = '';
 
